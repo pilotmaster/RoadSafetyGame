@@ -29,6 +29,70 @@
 	</head>
 	<body>
 		<script>
+		
+		<!-- JavaScript section -->
+		<!-- VARIABLES -->
+		var
+		
+		<!-- Window-based data -->
+		canvas,
+		context,
+		width,
+		height,
+		
+		<!-- Run-time game data -->
+		frames = 0,
+		players = 0,
+		curPlayer = 0,
+		
+		<!-- Game state data -->
+		curState,
+		states =
+		{
+			SPLASH: 0, GAME: 1, MESSAGE: 2, WINNER: 3
+		},
+		
+		<!-- Game pieces -->
+		board,
+		dice = {},
+		playerPieces = {};
+		
+		
+		<!-- FUNCTIONS -->
+		function Main()
+		{
+			<!-- Create the canvas -->
+			canvas = document.createElement("canvas");
+			
+			<!-- Retrieve the width and height of the window and apply it to the canvas -->
+			width = window.innerWidth;
+			height = window.innerHeight;
+			canvas.width = 320;
+			canvas.height = 480;
+			canvas.style.border = "1px solid #000";
+			context = canvas.getContext("2d");
+			document.body.appendChild(canvas);
+		}
+		
+		function Run()
+		{
+			
+		}
+		
+		function Update()
+		{
+			
+		}
+		
+		function Render()
+		{
+			
+		}
+		
+		
+		<!-- Start execution by calling the Main function -->
+		Main();
+		
 		</script>
 	</body>
 </html>
