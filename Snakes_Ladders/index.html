@@ -11,7 +11,7 @@
 		<title>Snakes & Ladders: Road Safety</title>
 		
 		<!-- Run the script which loads all of the sprites from the sprite sheet -->
-		<script src="SpriteList.js"></script>
+		<script src="SpritesList.js"></script>
 		
 		<!-- Styling options -->
 		<style>
@@ -53,7 +53,6 @@
 		},
 		
 		<!-- Game pieces -->
-		board,
 		dice = {},
 		playerPieces = {};
 		
@@ -64,29 +63,44 @@
 			<!-- Create the canvas -->
 			canvas = document.createElement("canvas");
 			
-			<!-- Retrieve the width and height of the window and apply it to the canvas -->
+			<!-- Set the canvas width and height, along with the type of border. Update the context and apply changes -->
 			width = window.innerWidth;
 			height = window.innerHeight;
-			canvas.width = 320;
-			canvas.height = 480;
+			canvas.width = width;
+			canvas.height = height;
 			canvas.style.border = "1px solid #000";
 			context = canvas.getContext("2d");
 			document.body.appendChild(canvas);
+			
+			<!-- Initialise the sprites and call the run function -->
+			<!-- Load sprites takes either RS or SD depending on which board is being used -->
+			LoadSprites("RS");
+			Run();
 		}
 		
 		function Run()
 		{
-			
+			<!-- Create a loop to go through updating the entities and then rendering them -->
+			var loop = function()
+			{
+				Update();
+				Render();
+				window.requestAnimationFrame(loop, canvas);
+			}
+			window.requestAnimationFrame(loop, canvas);
 		}
 		
 		function Update()
 		{
-			
+			<!-- Increment the number of frames passed -->
+			frames++;
 		}
 		
 		function Render()
 		{
-			
+			<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
+			<!-- Start by drawing the board of the game -->
+			spriteBoard.Draw(context, 0, 0, spriteBoard.mWidth, spriteBoard.mHeight);
 		}
 		
 		
