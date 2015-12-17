@@ -1,12 +1,12 @@
 // Declare a list of sprite variables
 var
 spriteBoard,
-spriteButton,
+rollDiceButton,
 spriteDice = new Array(6),
 spritePlayers;
 
 // Declare the Sprite class
-function CSprite(image, posX, posY, width, height)
+function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 {
 	// Attributes
 	this.mImage = image;
@@ -14,12 +14,14 @@ function CSprite(image, posX, posY, width, height)
 	this.mPosY = posY;
 	this.mWidth = width;
 	this.mHeight = height;
+	this.mDrawPosX = drawPosX;
+	this.mDrawPosY = drawPosY;
 	
 	// Methods
-	this.Draw = function(context, posX, posY)
+	this.Draw = function(context)
 	{
 		// Draw the sprite at the provided location using the saved data
-		context.drawImage(this.mImage, this.mPosX, this.mPosY, this.mWidth, this.mHeight, posX, posY, this.mWidth, this.mHeight);
+		context.drawImage(this.mImage, this.mPosX, this.mPosY, this.mWidth, this.mHeight, this.mDrawPosX, this.mDrawPosY, this.mWidth, this.mHeight);
 	}
 }
 
@@ -39,7 +41,7 @@ function LoadSprites(board)
 		// Button Image
 		var buttonImage = new Image();
 		buttonImage.src = "res/duoarms.jpg";
-		spriteButton = new CSprite(buttonImage, 0, 0, 424, 946);
+		rollDiceButton = new CSprite(buttonImage, 0, 0, 424, 946);
 				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
@@ -50,12 +52,12 @@ function LoadSprites(board)
 	
 	// These sprites will be created regardless of which board is chosen
 	// Dice sprites - 6 sides, so 6 individual sprites
-	spriteDice[0] = new CSprite(sheetImage, 7, 5, 177, 167);
-	spriteDice[2] = new CSprite(sheetImage, 246, 5, 177, 167);
-	spriteDice[5] = new CSprite(sheetImage, 486, 5, 177, 167);
-	spriteDice[1] = new CSprite(sheetImage, 7, 229, 177, 167);
-	spriteDice[3] = new CSprite(sheetImage, 246, 229, 177, 167);
-	spriteDice[4] = new CSprite(sheetImage, 486, 229, 177, 167);
+	spriteDice[0] = new CSprite(sheetImage, 7, 5, 177, 167, 5, 5);
+	spriteDice[2] = new CSprite(sheetImage, 246, 5, 177, 167, 5, 5);
+	spriteDice[5] = new CSprite(sheetImage, 486, 5, 177, 167, 5, 5);
+	spriteDice[1] = new CSprite(sheetImage, 7, 229, 177, 167, 5, 5);
+	spriteDice[3] = new CSprite(sheetImage, 246, 229, 177, 167, 5, 5);
+	spriteDice[4] = new CSprite(sheetImage, 486, 229, 177, 167, 5, 5);
 	
 	// Player sprites
 	

@@ -1,31 +1,29 @@
-var mouseX;
-var mouseY;
-var diceNum = 3;
+var 
+mouseX,
+mouseY,
+diceNum = 3,
 
 EbuttonType =
 {
 	RollDice: 0, Gay: 1, Gayyer: 2, Gayyyer: 3
-},
+};
 
 function Button(sprite, buttonType)
 {
-	this.m_ButtonType = buttonType;
-	this.m_Sprite = sprite;
+	this.mButtonType = buttonType;
+	this.mSprite = sprite;
 	this.BeenClicked = function()
 	{
-		var width  = m_Sprite.width;
-		var height = m_Sprite.height;
+		var width  = this.mSprite.mWidth;
+		var height = this.mSprite.mHeight;
 		
-		if(mouseX > m_Sprite.mPosX && mouseX < m_Sprite.mPosX + width
-		   && mouseY > m_Sprite.mPosY && mouseY < m_Sprite.mPosY + height)
+		if(mouseX > this.mSprite.mDrawPosX && mouseX < this.mSprite.mDrawPosX + width
+		   && mouseY > this.mSprite.mDrawPosY && mouseY < this.mSprite.mDrawPosY + height)
 		   {
-			   if(m_ButtonType == EbuttonType.RollDice)
+			   if(this.mButtonType == EbuttonType.RollDice)
 			   {
-				   diceNum = Math.floor((Math.random() * 5) + 0);
+				   diceNum = Math.floor((Math.random() * 6));
 			   }
 		   }
 	}
-	
-	
-	
 }

@@ -63,8 +63,9 @@
 		},
 		
 		<!-- Game data -->
-		playerPieces = {};
-		
+		playerPieces = {},
+		arraySize = 1,
+		buttonsArray = new Array(arraySize);
 		
 		<!-- FUNCTIONS -->
 		function Main()
@@ -84,21 +85,28 @@
 			elemLeft = canvas.offsetLeft,
 			elemTop  = canvas.offsetTop,
 			
-			canvas.addEventListener("click", function() 
-			{
-				mouseX = event.pageX - elemLeft,
-				mouseY = event.pageY - elemTop;
-					
-				alert("X Pos (" + mouseX + ", " + "Y Pos " + mouseY + ")")
-			}	
-			, false);
-			
 			document.body.appendChild(canvas);
 			
 			<!-- Initialise the sprites and call the run function -->
 			<!-- Load sprites takes either RS or SD depending on which board is being used -->
 			LoadSprites("RS");
 				
+			canvas.addEventListener("click", function() 
+			{
+				mouseX = event.pageX - elemLeft,
+				mouseY = event.pageY - elemTop;
+
+				for(var i = 0; i < arraySize; i++)
+				{
+					buttonsArray[i].BeenClicked();
+				}
+					
+				//alert("X Pos (" + mouseX + ", " + "Y Pos " + mouseY + ")")
+			}	
+			, false);
+			
+			buttonsArray[0] = new Button(rollDiceButton,EbuttonType.RollDice);
+			
 			Run();
 		}
 		
@@ -126,7 +134,7 @@
 			<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
 			<!-- Start by drawing the board of the game -->
 			spriteBoard.Draw(context, 400, 0, spriteBoard.mWidth, spriteBoard.mHeight);
-			spriteButton.Draw(context, 230, 100, spriteButton.mWidth, spriteButton.mHeight)
+			rollDiceButton.Draw(context, 230, 100, rollDiceButton.mWidth, rollDiceButton.mHeight)
 			spriteDice[diceNum].Draw(context, 5, 5, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
 		}
 		
