@@ -36,12 +36,12 @@ function LoadSprites(board)
 		// Board Image
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
-		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946);
+		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946, 400, 0);
 		
 		// Button Image
 		var buttonImage = new Image();
 		buttonImage.src = "res/duoarms.jpg";
-		rollDiceButton = new CSprite(buttonImage, 0, 0, 424, 946);
+		rollDiceButton = new CSprite(buttonImage, 0, 0, 170, 48, 320, 100);
 				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
