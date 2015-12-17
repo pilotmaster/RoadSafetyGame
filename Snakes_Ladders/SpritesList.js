@@ -40,8 +40,8 @@ function LoadSprites(board)
 		
 		// Button Image
 		var buttonImage = new Image();
-		buttonImage.src = "res/duoarms.jpg";
-		rollDiceButton = new CSprite(buttonImage, 0, 0, 170, 48, 320, 100);
+		buttonImage.src = "";
+		rollDiceButton = new CSprite(buttonImage, 0, 0, 177, 167, 5, 5);
 				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}

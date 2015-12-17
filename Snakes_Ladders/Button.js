@@ -22,12 +22,7 @@ function Button(sprite, buttonType)
 		
 		if(mouseX > this.mSprite.mDrawPosX && mouseX < maxWidth
 		   && mouseY > this.mSprite.mDrawPosY && mouseY < maxHeight)
-		   {
-			   alert("X Min: " + this.mSprite.mDrawPosX + "  X Max: " + maxWidth + 
-			   "\nY Min: " + this.mSprite.mDrawPosY + "  Y Max: " + maxHeight +
-			   "\nWidth: " + width + "  Height: " + height +
-			   "\nMouse X: " + mouseX + "  Mouse Y: " + mouseY);
-			   
+		   {   
 			   if(this.mButtonType == EbuttonType.RollDice)
 			   {
 				   diceNum = Math.floor((Math.random() * 6));
