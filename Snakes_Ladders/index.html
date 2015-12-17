@@ -86,9 +86,10 @@
 			
 			canvas.addEventListener("click", function() 
 			{
-				var x = event.pageX - elemLeft,
-				y = event.pageY - elemTop;
-				alert("X Pos (" + x + ", " + "Y Pos " + y + ")")
+				mouseX = event.pageX - elemLeft,
+				mouseY = event.pageY - elemTop;
+					
+				alert("X Pos (" + mouseX + ", " + "Y Pos " + mouseY + ")")
 			}	
 			, false);
 			

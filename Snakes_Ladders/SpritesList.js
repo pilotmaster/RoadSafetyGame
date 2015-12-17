@@ -5,8 +5,6 @@ spriteButton,
 spriteDice = new Array(6),
 spritePlayers;
 
-
-
 // Declare the Sprite class
 function CSprite(image, posX, posY, width, height)
 {
@@ -42,8 +40,7 @@ function LoadSprites(board)
 		var buttonImage = new Image();
 		buttonImage.src = "res/duoarms.jpg";
 		spriteButton = new CSprite(buttonImage, 0, 0, 424, 946);
-		
-			
+				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
 	
