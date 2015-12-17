@@ -5,7 +5,7 @@ diceNum = 3,
 
 EbuttonType =
 {
-	RollDice: 0, Gay: 1, Gayyer: 2, Gayyyer: 3
+	RollDice: 0, PlayerPiece: 1, StartGame: 2, Gayyyer: 3
 };
 
 function Button(sprite, buttonType)
@@ -23,9 +23,20 @@ function Button(sprite, buttonType)
 		if(mouseX > this.mSprite.mDrawPosX && mouseX < maxWidth
 		   && mouseY > this.mSprite.mDrawPosY && mouseY < maxHeight)
 		   {   
+				
+			   if(this.mButtonType == EbuttonType.StartGame)
+			   {
+				   curState = EStates.GAME;
+			   }
+			   
 			   if(this.mButtonType == EbuttonType.RollDice)
 			   {
 				   diceNum = Math.floor((Math.random() * 6));
+			   }
+			   
+			   if(this.mButtonType == EbuttonType.PlayerPiece)
+			   {
+				   
 			   }
 		   }
 	}

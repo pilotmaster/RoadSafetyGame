@@ -1,9 +1,17 @@
 // Declare a list of sprite variables
 var
+
+//** INGAME DATA**//
+// The board sprite 
 spriteBoard,
+// invis button for rolling the dice
 rollDiceButton,
+// array of the diffrent dice images
 spriteDice = new Array(6),
-spritePlayers;
+
+//** MAIN MENU DATA **//
+title,
+playButton;
 
 // Declare the Sprite class
 function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
@@ -42,6 +50,15 @@ function LoadSprites(board)
 		var buttonImage = new Image();
 		buttonImage.src = "";
 		rollDiceButton = new CSprite(buttonImage, 0, 0, 177, 167, 5, 5);
+		
+		// Splash Title
+		var titleImage = new Image();
+		titleImage.src = "res/SnakesTitle.jpg";
+		title = new CSprite(titleImage, 0, 0, 1000, 167, 500, 5);
+		
+		var playButtonImage = new Image();
+		playButtonImage.src = "res/Play.png";
+		playButton = new CSprite(playButtonImage, 0, 0, 1000, 137, 700, 450);
 				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
@@ -59,6 +76,8 @@ function LoadSprites(board)
 	spriteDice[3] = new CSprite(sheetImage, 246, 229, 177, 167, 5, 5);
 	spriteDice[4] = new CSprite(sheetImage, 486, 229, 177, 167, 5, 5);
 	
+	
 	// Player sprites
+	playerPieces[0] = new CSprite(sheetImage, 690, 3, 177, 95, 5, 300);
 	
 }

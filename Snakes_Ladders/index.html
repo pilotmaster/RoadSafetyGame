@@ -63,13 +63,14 @@
 		},
 		
 		<!-- Game data -->
-		playerPieces = {},
-		arraySize = 1,
+		playerPieces = new Array(6),
+		arraySize = 2,
 		buttonsArray = new Array(arraySize);
-		
+			
 		<!-- FUNCTIONS -->
 		function Main()
 		{
+			curState = EStates.SPLASH;
 			<!-- Create the canvas -->
 			canvas = document.getElementById("my_canvas");
 
@@ -90,7 +91,8 @@
 			<!-- Initialise the sprites and call the run function -->
 			<!-- Load sprites takes either RS or SD depending on which board is being used -->
 			LoadSprites("RS");
-				
+			
+			// Event Listner for mouse clicks
 			canvas.addEventListener("click", function() 
 			{
 				mouseX = event.pageX - elemLeft,
@@ -100,12 +102,12 @@
 				{
 					buttonsArray[i].BeenClicked();
 				}
-					
-				//alert("X Pos (" + mouseX + ", " + "Y Pos " + mouseY + ")")
 			}	
 			, false);
 			
-			buttonsArray[0] = new Button(rollDiceButton,EbuttonType.RollDice);
+			// array for buttons 
+			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice);
+			buttonsArray[1] = new Button(playButton, EbuttonType.StartGame);
 			
 			Run();
 		}
@@ -131,11 +133,23 @@
 		
 		function Render()
 		{
-			<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
-			<!-- Start by drawing the board of the game -->
-			spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
-			rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight)
-			spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
+		// if the game is in the menu state
+			if(curState == EStates.SPLASH)
+			{
+				title.Draw(context, title.mWidth,  title.mHeight);
+				playButton.Draw(context, title.mWidth, title.mHeight);
+			}
+			
+		// if the game is in the play state 
+			if(curState == EStates.GAME)
+			{
+				<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
+				<!-- Start by drawing the board of the game -->
+				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
+				rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
+				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
+				playerPieces[0].Draw(context, playerPieces[0].mWidth, playerPieces[0].mHeight);
+			}
 		}
 		
 		
