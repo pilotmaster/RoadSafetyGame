@@ -1,6 +1,8 @@
 // Declare a list of sprite variables
 var
-spriteBoard;
+spriteBoard,
+spriteButton;
+
 
 
 // Declare the Sprite class
@@ -29,9 +31,17 @@ function LoadSprites(board)
 	// Determine which one has been chosen
 	if (board == "RS")
 	{
+		// Board Image
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
 		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946);
+		
+		// Button Image
+		var buttonImage = new Image();
+		buttonImage.src = "res/duoarms.jpg";
+		spriteButton = new CSprite(buttonImage, 0, 0, 424, 946);
+		
+			
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
 }
