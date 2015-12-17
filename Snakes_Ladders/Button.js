@@ -1,5 +1,6 @@
 var mouseX;
 var mouseY;
+var diceNum = 3;
 
 EbuttonType =
 {
@@ -15,12 +16,12 @@ function Button(sprite, buttonType)
 		var width  = m_Sprite.width;
 		var height = m_Sprite.height;
 		
-		if(mouseX > width - width && mouseX < width 
-		   mouseY > height - height && mouseY < height)
+		if(mouseX > m_Sprite.mPosX && mouseX < m_Sprite.mPosX + width
+		   && mouseY > m_Sprite.mPosY && mouseY < m_Sprite.mPosY + height)
 		   {
 			   if(m_ButtonType == EbuttonType.RollDice)
 			   {
-				   
+				   diceNum = Math.floor((Math.random() * 5) + 0);
 			   }
 		   }
 	}
