@@ -56,13 +56,13 @@
 
 		<!-- Game state data -->
 		curState,
-		states =
+		EStates =
 		{
 			SPLASH: 0, GAME: 1, MESSAGE: 2, WINNER: 3
 		},
 		
-		<!-- Game pieces -->
-		dice = {},
+		<!-- Game data -->
+		diceNum = 3,
 		playerPieces = {};
 		
 		
@@ -126,7 +126,7 @@
 			<!-- Start by drawing the board of the game -->
 			spriteBoard.Draw(context, 400, 0, spriteBoard.mWidth, spriteBoard.mHeight);
 			spriteButton.Draw(context, 230, 100, spriteButton.mWidth, spriteButton.mHeight)
-			
+			spriteDice[diceNum].Draw(context, 5, 5, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
 		}
 		
 		
