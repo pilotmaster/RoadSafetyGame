@@ -53,12 +53,12 @@ function LoadSprites(board)
 	
 	// These sprites will be created regardless of which board is chosen
 	// Dice sprites - 6 sides, so 6 individual sprites
-	spriteDice[0] = new CSprite(sheetImage, 7, 5, 184, 172);
-	spriteDice[1] = new CSprite(sheetImage, 246, 5, 424, 172);
-	spriteDice[2] = new CSprite(sheetImage, 486, 5, 664, 172);
-	spriteDice[3] = new CSprite(sheetImage, 7, 229, 184, 396);
-	spriteDice[4] = new CSprite(sheetImage, 246, 229, 424, 396);
-	spriteDice[5] = new CSprite(sheetImage, 486, 229, 664, 396);
+	spriteDice[0] = new CSprite(sheetImage, 7, 5, 177, 167);
+	spriteDice[1] = new CSprite(sheetImage, 246, 5, 177, 167);
+	spriteDice[2] = new CSprite(sheetImage, 486, 5, 177, 167);
+	spriteDice[3] = new CSprite(sheetImage, 7, 229, 177, 167);
+	spriteDice[4] = new CSprite(sheetImage, 246, 229, 177, 167);
+	spriteDice[5] = new CSprite(sheetImage, 486, 229, 177, 167);
 	
 	// Player sprites
 	
