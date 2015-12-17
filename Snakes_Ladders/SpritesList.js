@@ -32,6 +32,6 @@ function LoadSprites(board)
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
 		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946);
-		alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
+		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}
 }

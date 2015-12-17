@@ -13,8 +13,20 @@
 		<!-- Run the script which loads all of the sprites from the sprite sheet -->
 		<script src="SpritesList.js"></script>
 		
-		<!-- Styling options -->
 		<style>
+		body
+		{ 
+			margin:10px;
+		}
+
+		#my_canvas
+		{ 
+			border:#000 6px solid; 
+		}
+		</style>
+		
+		<!-- Styling options -->
+		<!--<style>
 			canvas
 			{
 				display: block;
@@ -25,9 +37,12 @@
 				left: 0;
 				right: 0;
 			}
-		</style>
+		</style>-->
 	</head>
 	<body>
+	
+	<canvas id="my_canvas"></canvas>
+	
 		<script>
 		
 		<!-- JavaScript section -->
@@ -61,14 +76,14 @@
 		function Main()
 		{
 			<!-- Create the canvas -->
-			canvas = document.createElement("canvas");
+			canvas = document.getElementById("my_canvas");
 			
 			<!-- Set the canvas width and height, along with the type of border. Update the context and apply changes -->
 			width = window.innerWidth;
 			height = window.innerHeight;
 			canvas.width = width;
 			canvas.height = height;
-			canvas.style.border = "1px solid #000";
+			//canvas.style.border = "1px solid #000";
 			context = canvas.getContext("2d");
 			document.body.appendChild(canvas);
 			
@@ -100,7 +115,7 @@
 		{
 			<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
 			<!-- Start by drawing the board of the game -->
-			spriteBoard.Draw(context, 0, 0, spriteBoard.mWidth, spriteBoard.mHeight);
+			spriteBoard.Draw(context, 400, 0, spriteBoard.mWidth, spriteBoard.mHeight);
 		}
 		
 		
