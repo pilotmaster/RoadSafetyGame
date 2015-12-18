@@ -135,15 +135,14 @@
 			// Increment the number of frames passed
 			frames++;
 			
-			// Check if it is in the rolling dice phase
-			if (curTurnPhase == ETurnPhase.ROLLING_DICE)
+			// Check if it is in the rolling dice phase and 
+			if (curTurnPhase == ETurnPhase.ROLLING_DICE && )
 			{
 				// Check if it has 0 rolls left
 				if (diceRolls <= 0)
 				{
 					// It has finished rolling the dice - move to next phase
 					curTurnPhase = ETurnPhase.WAITING;		// Just move back to waiting FOR NOW
-					alert("WAITING");
 				}
 				else
 				{
