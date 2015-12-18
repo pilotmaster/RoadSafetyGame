@@ -42,15 +42,16 @@
 		context,
 		width,
 		height,
-		
 		elemLeft,
 		elemTop,
 		
-		
 		<!-- Run-time game data -->
 		frames = 0,
-		players = 0,
 		curPlayer = 0,
+		numPlayers = 6,
+		playersList,
+		buttonsAmount = 2,
+		buttonsArray = new Array(buttonsAmount),
 
 		<!-- Game state data -->
 		curState,
@@ -63,12 +64,7 @@
 		{
 			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, NEXT_PLAYER: 4
 		},
-		curTurnPhase = ETurnPhase.WAITING,
-		
-		<!-- Game data -->
-		playerPieces = new Array(6),
-		arraySize = 2,
-		buttonsArray = new Array(arraySize);
+		curTurnPhase = ETurnPhase.WAITING;
 			
 		<!-- FUNCTIONS -->
 		function Main()
@@ -89,27 +85,25 @@
 			context.fillStyle = "#000000";			
 			
 			// Event handler
-			elemLeft = canvas.offsetLeft,
-			elemTop  = canvas.offsetTop,
+			elemLeft = canvas.offsetLeft;
+			elemTop  = canvas.offsetTop;
 			
 			document.body.appendChild(canvas);
 			
-			// Initialise the sprites and call the run function
-			// Load sprites takes either RS or SD depending on which board is being used
-			LoadSprites("RS");
+			// Load the main menu sprites
+			LoadMenuSprites();
 			
 			// Event Listener for mouse clicks
 			canvas.addEventListener("click", function() 
 			{
-				mouseX = event.pageX - elemLeft,
+				mouseX = event.pageX - elemLeft;
 				mouseY = event.pageY - elemTop;
 
-				for(var i = 0; i < arraySize; i++)
+				for (i = 0; i < buttonsAmount; i++)
 				{
 					buttonsArray[i].BeenClicked();
 				}
-			}	
-			, false);
+			}, false);
 			
 			// array for buttons 
 			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice);
@@ -142,7 +136,7 @@
 				if (diceRolls <= 0)
 				{
 					// It has finished rolling the dice - move to next phase
-					curTurnPhase = ETurnPhase.MOVING;		// Just move back to waiting FOR NOW
+					curTurnPhase = ETurnPhase.MOVING;
 				}
 				else
 				{
@@ -168,7 +162,23 @@
 				else
 				{
 					// Set to the next phase
-					curTurnPhase = ETurnPhase.WAITING;		// Just move back to waiting FOR NOW
+					curTurnPhase = ETurnPhase.REACT_TO_TILE;
+				}
+			}
+			else if (curTurnPhase == ETurnPhase.REACT_TO_TILE)
+			{
+				// TO DO: just move to next player
+				curTurnPhase = ETurnPhase.NEXT_PLAYER;
+			}
+			else if (curTurnPhase == ETurnPhase.NEXT_PLAYER)
+			{
+				// Increment to the next player
+				curPlayer += 1;
+				
+				// Check if it should loop back round to player 1
+				if (curPlayer == numPlayers)
+				{
+					curPlayer = 0;
 				}
 			}
 		}
@@ -188,18 +198,19 @@
 			// if the game is in the play state 
 			if(curState == EStates.GAME)
 			{
-				<!-- Order of drawing is important. Anything new drawn replaces anything old drawn -->
-				<!-- Start by drawing the board of the game -->
+				// Order of drawing is important. Anything new drawn replaces anything old drawn
+				// Start by drawing the board of the game
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
-				playerPieces[0].Draw(context, playerPieces[0].mWidth, playerPieces[0].mHeight);
+				
+				// Render each player
+				for (i = 0; i < numPlayers; i++)
+				{
+					// Call the render function for the given player
+					playersList[i].Render(context);
+				}
 			}
-		}
-		
-		function Move()
-		{
-			playerPieces[0].mDrawPosX += 10;
 		}
 		
 		<!-- Start execution by calling the Main function -->

@@ -4,10 +4,11 @@ var
 //** INGAME DATA**//
 // The board sprite 
 spriteBoard,
-// invis button for rolling the dice
+// Invisible button for rolling the dice
 rollDiceButton,
-// array of the diffrent dice images
+// array of the different dice images
 spriteDice = new Array(6),
+spritePieces = new Array(10),
 
 //** MAIN MENU DATA **//
 title,
@@ -34,6 +35,23 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 }
 
 
+// Function to load the initial main menu sprites
+function LoadMenuSprites()
+{
+	// Splash Title
+	var titleImage = new Image();
+	titleImage.src = "res/SnakesTitle.jpg";
+	title = new CSprite(titleImage, 0, 0, 1000, 167, 500, 5);
+	
+	// Load the sprite sheet image
+	var sheetImage = new Image();
+	sheetImage.src = "res/SpriteSheet.png";
+	
+	// Play button for main menu
+	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 700, 450);
+}
+
+
 // Function to initialise all the sprites
 function LoadSprites(board)
 {
@@ -41,7 +59,6 @@ function LoadSprites(board)
 	// Determine which one has been chosen
 	if (board == "RS")
 	{
-
 		// Board Image
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
@@ -50,22 +67,12 @@ function LoadSprites(board)
 		// Button Image
 		var buttonImage = new Image();
 		buttonImage.src = "";
-		rollDiceButton = new CSprite(buttonImage, 0, 0, 177, 167, 5, 5);
-		
-		// Splash Title
-		var titleImage = new Image();
-		titleImage.src = "res/SnakesTitle.jpg";
-		title = new CSprite(titleImage, 0, 0, 1000, 167, 500, 5);
-				
-		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
+		rollDiceButton = new CSprite(buttonImage, 0, 0, 221, 214, 5, 5);
 	}
 	
 	// Load the sprite sheet image
 	var sheetImage = new Image();
 	sheetImage.src = "res/SpriteSheet.png";
-	
-	// Play button for main menu
-	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 700, 450);
 	
 	// These sprites will be created regardless of which board is chosen
 	// Dice sprites - 6 sides, so 6 individual sprites
@@ -77,5 +84,14 @@ function LoadSprites(board)
 	spriteDice[4] = new CSprite(sheetImage, 8, 13, 221, 214, 5, 5);
 	
 	// Player sprites
-	playerPieces[0] = new CSprite(sheetImage, 708, 16, 69, 54, 5, 300);
+	spritePieces[0] = new CSprite(sheetImage, 708, 16, 69, 54, 5, 300);
+	spritePieces[1] = new CSprite(sheetImage, 795, 16, 69, 54, 5, 380);
+	spritePieces[2] = new CSprite(sheetImage, 882, 16, 69, 54, 5, 460);
+	spritePieces[3] = new CSprite(sheetImage, 969, 16, 69, 54, 5, 520);
+	spritePieces[4] = new CSprite(sheetImage, 1056, 16, 69, 54, 5, 600);
+	spritePieces[5] = new CSprite(sheetImage, 708, 73, 69, 54, 5, 680);
+	spritePieces[6] = new CSprite(sheetImage, 795, 73, 69, 54, 5, 760);
+	spritePieces[7] = new CSprite(sheetImage, 882, 73, 69, 54, 5, 840);
+	spritePieces[8] = new CSprite(sheetImage, 969, 73, 69, 54, 5, 920);
+	spritePieces[9] = new CSprite(sheetImage, 1056, 73, 69, 54, 5, 1000);
 }
