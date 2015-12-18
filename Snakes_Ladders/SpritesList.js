@@ -37,12 +37,6 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 // Function to initialise all the sprites
 function LoadSprites(board)
 {
-	// Load sprites that are not related to the chosen board
-	// Play button on main menu
-	var playButtonImage = new Image();
-	playButtonImage.src = "res/Play.png";
-	playButton = new CSprite(playButtonImage, 0, 0, 1000, 137, 700, 450);
-	
 	// There are two boards available: Road Safety and Sustainable Development
 	// Determine which one has been chosen
 	if (board == "RS")
@@ -69,14 +63,17 @@ function LoadSprites(board)
 	var sheetImage = new Image();
 	sheetImage.src = "res/SpriteSheet.png";
 	
+	// Play button for main menu
+	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 700, 450);
+	
 	// These sprites will be created regardless of which board is chosen
 	// Dice sprites - 6 sides, so 6 individual sprites
-	spriteDice[0] = new CSprite(sheetImage, 7, 5, 177, 167, 5, 5);
-	spriteDice[2] = new CSprite(sheetImage, 246, 5, 177, 167, 5, 5);
-	spriteDice[5] = new CSprite(sheetImage, 486, 5, 177, 167, 5, 5);
-	spriteDice[1] = new CSprite(sheetImage, 7, 229, 177, 167, 5, 5);
-	spriteDice[3] = new CSprite(sheetImage, 246, 229, 177, 167, 5, 5);
-	spriteDice[4] = new CSprite(sheetImage, 486, 229, 177, 167, 5, 5);
+	spriteDice[0] = new CSprite(sheetImage, 11, 234, 221, 214, 5, 5);
+	spriteDice[2] = new CSprite(sheetImage, 236, 234, 221, 214, 5, 5);
+	spriteDice[5] = new CSprite(sheetImage, 461, 13, 221, 214, 5, 5);
+	spriteDice[1] = new CSprite(sheetImage, 461, 234, 221, 214, 5, 5);
+	spriteDice[3] = new CSprite(sheetImage, 235, 13, 221, 214, 5, 5);
+	spriteDice[4] = new CSprite(sheetImage, 8, 13, 221, 214, 5, 5);
 	
 	
 	// Player sprites
