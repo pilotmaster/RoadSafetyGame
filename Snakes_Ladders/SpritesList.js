@@ -37,6 +37,12 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 // Function to initialise all the sprites
 function LoadSprites(board)
 {
+	// Load sprites that are not related to the chosen board
+	// Play button on main menu
+	var playButtonImage = new Image();
+	playButtonImage.src = "res/Play.png";
+	playButton = new CSprite(playButtonImage, 0, 0, 1000, 137, 700, 450);
+	
 	// There are two boards available: Road Safety and Sustainable Development
 	// Determine which one has been chosen
 	if (board == "RS")
@@ -55,10 +61,6 @@ function LoadSprites(board)
 		var titleImage = new Image();
 		titleImage.src = "res/SnakesTitle.jpg";
 		title = new CSprite(titleImage, 0, 0, 1000, 167, 500, 5);
-		
-		var playButtonImage = new Image();
-		playButtonImage.src = "res/Play.png";
-		playButton = new CSprite(playButtonImage, 0, 0, 1000, 137, 700, 450);
 				
 		//alert(spriteBoard.mWidth + " " + spriteBoard.mHeight);
 	}

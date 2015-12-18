@@ -82,17 +82,17 @@
 			//canvas.style.border = "1px solid #000";
 			context = canvas.getContext("2d");
 			
-			//Event handler
+			// Event handler
 			elemLeft = canvas.offsetLeft,
 			elemTop  = canvas.offsetTop,
 			
 			document.body.appendChild(canvas);
 			
-			<!-- Initialise the sprites and call the run function -->
-			<!-- Load sprites takes either RS or SD depending on which board is being used -->
+			// Initialise the sprites and call the run function
+			// Load sprites takes either RS or SD depending on which board is being used
 			LoadSprites("RS");
 			
-			// Event Listner for mouse clicks
+			// Event Listener for mouse clicks
 			canvas.addEventListener("click", function() 
 			{
 				mouseX = event.pageX - elemLeft,
@@ -126,7 +126,6 @@
 		
 		function Update()
 		{
-
 			<!-- Increment the number of frames passed -->
 			frames++;
 		}
