@@ -51,7 +51,7 @@ function Button(sprite, buttonType)
 					   curTurnPhase = ETurnPhase.ROLLING_DICE;
 					   
 					   // Determine how many jumps the dice does before settling on a number
-					   diceRolls = Math.floor((Math.random() * 60)) + 30;
+					   diceRolls = Math.floor((Math.random() * 15)) + 5;
 				   }
 			   }
 			   
