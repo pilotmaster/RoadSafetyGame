@@ -62,6 +62,12 @@
 			SPLASH: 0, GAME: 1, MESSAGE: 2, WINNER: 3
 		},
 		
+		curTurnPhase,
+		ETurnPhase =
+		{
+			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, NEXT_PLAYER: 4
+		},
+		
 		<!-- Game data -->
 		playerPieces = new Array(6),
 		arraySize = 2,
