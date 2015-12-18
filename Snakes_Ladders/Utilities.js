@@ -9,6 +9,7 @@ diceNum = 0,
 
 // Determines how many random values are shown on the dice before it settles
 diceRolls = 0,
+amountToMove = 0,
 
 // Enumeration of button types
 EbuttonType =
