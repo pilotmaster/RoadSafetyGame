@@ -49,6 +49,11 @@ function LoadMenuSprites()
 	
 	// Play button for main menu
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 700, 450);
+	
+	// Button Image
+	var buttonImage = new Image();
+	buttonImage.src = "";
+	rollDiceButton = new CSprite(buttonImage, 0, 0, 221, 214, 5, 5);
 }
 
 
@@ -63,11 +68,6 @@ function LoadSprites(board)
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
 		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946, 400, 0);
-		
-		// Button Image
-		var buttonImage = new Image();
-		buttonImage.src = "";
-		rollDiceButton = new CSprite(buttonImage, 0, 0, 221, 214, 5, 5);
 	}
 	
 	// Load the sprite sheet image

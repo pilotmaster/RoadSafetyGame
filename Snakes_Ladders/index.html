@@ -153,8 +153,8 @@
 				// Check the amount left to move
 				if (amountToMove > 0)
 				{
-					// Move
-					Move();
+					// Move the current player
+					playersList[curPlayer].Move();
 					
 					// Decrement move amount
 					amountToMove = amountToMove - 1;
@@ -180,6 +180,9 @@
 				{
 					curPlayer = 0;
 				}
+				
+				// Set the state to waiting
+				curTurnPhase = ETurnPhase.WAITING;
 			}
 		}
 		

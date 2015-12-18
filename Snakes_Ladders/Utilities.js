@@ -47,7 +47,6 @@ function Button(sprite, buttonType)
 		if(mouseX > this.mSprite.mDrawPosX && mouseX < maxWidth
 		   && mouseY > this.mSprite.mDrawPosY && mouseY < maxHeight)
 		{   
-				
 			if (this.mButtonType == EbuttonType.StartGame)
 			{
 				// Call the initialise game function
@@ -122,12 +121,12 @@ function InitialiseGame()
 	
 	// Initialise the players
 	playersList = new Array(numPlayers);
-	playersList[0] = new CPlayer(pieceList[0]);
-	playersList[1] = new CPlayer(pieceList[1]);
-	playersList[2] = new CPlayer(pieceList[2]);
-	playersList[3] = new CPlayer(pieceList[3]);
-	playersList[4] = new CPlayer(pieceList[4]);
-	playersList[5] = new CPlayer(pieceList[5]);
+	playersList[0] = new CPlayer(piecesList[0]);
+	playersList[1] = new CPlayer(piecesList[1]);
+	playersList[2] = new CPlayer(piecesList[2]);
+	playersList[3] = new CPlayer(piecesList[3]);
+	playersList[4] = new CPlayer(piecesList[4]);
+	playersList[5] = new CPlayer(piecesList[5]);
 }
 
 
@@ -137,6 +136,6 @@ function InitialisePieces()
 	// Go through and create each piece object
 	for (i = 0; i < 10; i++)
 	{
-		piecesList[i] = new CPiece(player, EPieceColours.parse(i));
+		piecesList[i] = new CPiece(spritePieces[i], i);
 	}
 }
