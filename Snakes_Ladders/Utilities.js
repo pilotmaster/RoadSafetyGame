@@ -7,6 +7,9 @@ mouseY,
 // When the dice is rolled, this value will change
 diceNum = 0,
 
+// Determines how many random values are shown on the dice before it settles
+diceRolls = 0,
+
 // Enumeration of button types
 EbuttonType =
 {
@@ -41,7 +44,15 @@ function Button(sprite, buttonType)
 			   
 			   if(this.mButtonType == EbuttonType.RollDice)
 			   {
-				   diceNum = Math.floor((Math.random() * 6));
+				   // Only execute this part if the game is in the WAITING phase
+				   if (curTurnPhase == ETurnPhase.WAITING && curState == EStates.GAME)
+				   {
+					   // Set the phase to be rolling the dice
+					   curTurnPhase = ETurnPhase.ROLLING_DICE;
+					   
+					   // Determine how many jumps the dice does before settling on a number
+					   diceRolls = Math.floor((Math.random() * 60)) + 30;
+				   }
 			   }
 			   
 			   if(this.mButtonType == EbuttonType.PlayerPiece)
