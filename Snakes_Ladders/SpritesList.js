@@ -76,8 +76,6 @@ function LoadSprites(board)
 	spriteDice[3] = new CSprite(sheetImage, 235, 13, 221, 214, 5, 5);
 	spriteDice[4] = new CSprite(sheetImage, 8, 13, 221, 214, 5, 5);
 	
-	
 	// Player sprites
-	playerPieces[0] = new CSprite(sheetImage, 690, 3, 177, 95, 5, 300);
-	
+	playerPieces[0] = new CSprite(sheetImage, 708, 16, 69, 54, 5, 300);
 }
