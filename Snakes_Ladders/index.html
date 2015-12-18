@@ -62,11 +62,11 @@
 			SPLASH: 0, GAME: 1, MESSAGE: 2, WINNER: 3
 		},
 		
-		curTurnPhase,
 		ETurnPhase =
 		{
 			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, NEXT_PLAYER: 4
 		},
+		curTurnPhase = ETurnPhase.WAITING,
 		
 		<!-- Game data -->
 		playerPieces = new Array(6),
@@ -132,8 +132,28 @@
 		
 		function Update()
 		{
-			<!-- Increment the number of frames passed -->
+			// Increment the number of frames passed
 			frames++;
+			
+			// Check if it is in the rolling dice phase
+			if (curTurnPhase == ETurnPhase.ROLLING_DICE)
+			{
+				// Check if it has 0 rolls left
+				if (diceRolls <= 0)
+				{
+					// It has finished rolling the dice - move to next phase
+					curTurnPhase = ETurnPhase.WAITING;		// Just move back to waiting FOR NOW
+					alert("WAITING");
+				}
+				else
+				{
+					// Decrease number of rolls left to do
+					diceRolls = diceRolls - 1;
+					
+					// Get a new random dice number
+					diceNum = Math.floor((Math.random() * 6));
+				}
+			}
 		}
 		
 		function Render()
