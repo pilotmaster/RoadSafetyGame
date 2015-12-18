@@ -24,7 +24,7 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 	this.mHeight = height;
 	this.mDrawPosX = drawPosX;
 	this.mDrawPosY = drawPosY;
-	
+
 	// Methods
 	this.Draw = function(context)
 	{
@@ -41,6 +41,7 @@ function LoadSprites(board)
 	// Determine which one has been chosen
 	if (board == "RS")
 	{
+
 		// Board Image
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";

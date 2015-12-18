@@ -132,6 +132,7 @@
 		
 		function Update()
 		{
+			Move();
 			<!-- Increment the number of frames passed -->
 			frames++;
 		}
@@ -157,6 +158,10 @@
 			}
 		}
 		
+		function Move()
+		{
+			playerPieces[0].mDrawPosX++;
+		}
 		
 		<!-- Start execution by calling the Main function -->
 		Main();
