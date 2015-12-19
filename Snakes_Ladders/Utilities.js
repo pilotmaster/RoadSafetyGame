@@ -106,6 +106,38 @@ function CPlayer(piece)
 	}
 }
 
+function CBoardTile(posX, posY)
+{
+	this.mPosX = posX;
+	this.mPosY = posY;
+}
+
+function CBoardRoadSafety(board)
+{
+	this.mBoard = board;
+	this.mBoardArray = new Array(100);
+	this.mDimentions = 75;
+	this.mTileIncrementX = 0;
+	this.mTileIncrementY = 0;
+	
+	this.mFillArray = function()
+	{
+		for(var i = 0; i < 100; i++)
+		{
+			if(this.mTileIncrementX == 11)
+			{
+				this.mTileIncrementX = 0;
+				this.mTileIncrementY++;
+			}
+			
+			var tileMonitarX = parseInt(this.mTileIncrementX) * parseInt(this.mDimentions);
+			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentions);
+			
+			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 115 + parseInt(this.tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 765 - parseInt(this.tileMonitarY));
+			this.mTileIncrementX++;
+		}
+	}
+}
 
 // Function to initialise the game objects
 function InitialiseGame()
@@ -113,8 +145,14 @@ function InitialiseGame()
 	// Set the current state to be the game
 	curState = EStates.GAME;
 	
+    
+			
 	// Load sprites takes either RS or SD depending on which board is being used
 	LoadSprites("RS");
+	
+	var boardTest = new CBoardRoadSafety(spriteBoard);
+	boardTest.mFillArray();
+	alert(boardTest.mBoardArray[2].mPosX);
 	
 	// Initialise the pieces objects
 	InitialisePieces();
