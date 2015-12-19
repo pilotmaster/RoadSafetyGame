@@ -108,7 +108,7 @@
 			// array for buttons 
 			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice);
 			buttonsArray[1] = new Button(playButton, EbuttonType.StartGame);
-	
+
 			Run();
 		}
 		
@@ -148,7 +148,7 @@
 					amountToMove = diceNum + 1;
 				}
 			}
-			else if (curTurnPhase == ETurnPhase.MOVING && frames % 16 == 0)
+			else if (curTurnPhase == ETurnPhase.MOVING && frames % 1 == 0)
 			{
 				// Check the amount left to move
 				if (amountToMove > 0)
@@ -157,7 +157,7 @@
 					playersList[curPlayer].Move();
 					
 					// Decrement move amount
-					amountToMove = amountToMove - 1;
+					//amountToMove = amountToMove - 1;
 				}
 				else
 				{

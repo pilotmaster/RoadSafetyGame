@@ -14,6 +14,9 @@ amountToMove = 0,
 // List of pieces in the game
 piecesList = new Array(10),
 
+// Board array
+boardArray,
+
 // Enumeration of button types
 EbuttonType =
 {
@@ -95,7 +98,33 @@ function CPlayer(piece)
 	// Move function for the player object
 	this.Move = function()
 	{
-		this.mPiece.mSprite.mDrawPosX += 10;
+			if(this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mGridPos].mPosX)
+			{
+				if(this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mGridPos].mPosX)
+				{
+					this.mPiece.mSprite.mDrawPosX += 1;
+				}
+				else
+				{
+					this.mPiece.mSprite.mDrawPosX -= 1;
+				}
+			}
+			if(this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mGridPos].mPosY)
+			{
+				if(this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mGridPos].mPosY)
+				{
+					this.mPiece.mSprite.mDrawPosY += 1;
+				}
+				else
+				{
+					this.mPiece.mSprite.mDrawPosY -= 1;
+				}				
+			}		
+			if(this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[0].mPosY)
+			{
+				amountToMove = amountToMove - 1;
+				this.mGridPos++;
+			}		
 	}
 	
 	// Function to render this player
@@ -116,7 +145,7 @@ function CBoardRoadSafety(board)
 {
 	this.mBoard = board;
 	this.mBoardArray = new Array(100);
-	this.mDimentions = 75;
+	this.mDimentions = 71;
 	this.mTileIncrementX = 0;
 	this.mTileIncrementY = 0;
 	
@@ -133,7 +162,7 @@ function CBoardRoadSafety(board)
 			var tileMonitarX = parseInt(this.mTileIncrementX) * parseInt(this.mDimentions);
 			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentions);
 			
-			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 115 + parseInt(this.tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 765 - parseInt(this.tileMonitarY));
+			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 115 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 760 - parseInt(tileMonitarY));
 			this.mTileIncrementX++;
 		}
 	}
@@ -144,15 +173,13 @@ function InitialiseGame()
 {
 	// Set the current state to be the game
 	curState = EStates.GAME;
-	
-    
 			
 	// Load sprites takes either RS or SD depending on which board is being used
 	LoadSprites("RS");
 	
-	var boardTest = new CBoardRoadSafety(spriteBoard);
-	boardTest.mFillArray();
-	alert(boardTest.mBoardArray[2].mPosX);
+	boardArray = new CBoardRoadSafety(spriteBoard);
+	boardArray.mFillArray();
+	//alert(boardArray.mBoardArray[5].mPosY);
 	
 	// Initialise the pieces objects
 	InitialisePieces();
