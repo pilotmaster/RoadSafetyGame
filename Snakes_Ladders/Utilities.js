@@ -93,14 +93,14 @@ function CPiece(sprite, colour)
 function CPlayer(piece)
 {
 	this.mPiece = piece;
-	this.mGridPos = 0;
-	
+	this.mTargetGridPos = 0;
+	this.mPlayerGridPos;
 	// Move function for the player object
 	this.Move = function()
 	{
-			if(this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mGridPos].mPosX)
+			if(this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
 			{
-				if(this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mGridPos].mPosX)
+				if(this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
 				{
 					this.mPiece.mSprite.mDrawPosX += 1;
 				}
@@ -109,9 +109,9 @@ function CPlayer(piece)
 					this.mPiece.mSprite.mDrawPosX -= 1;
 				}
 			}
-			if(this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mGridPos].mPosY)
+			if(this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
 			{
-				if(this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mGridPos].mPosY)
+				if(this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
 				{
 					this.mPiece.mSprite.mDrawPosY += 1;
 				}
@@ -120,10 +120,11 @@ function CPlayer(piece)
 					this.mPiece.mSprite.mDrawPosY -= 1;
 				}				
 			}		
-			if(this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[0].mPosY)
+			if(this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mTargetGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mTargetGridPos].mPosY)
 			{
 				amountToMove = amountToMove - 1;
-				this.mGridPos++;
+				this.mTargetGridPos++;
+				this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
 			}		
 	}
 	
@@ -148,22 +149,51 @@ function CBoardRoadSafety(board)
 	this.mDimentions = 71;
 	this.mTileIncrementX = 0;
 	this.mTileIncrementY = 0;
+	this.mReversingBoard = false;
 	
 	this.mFillArray = function()
 	{
+		// Count though the array tiles for the board
 		for(var i = 0; i < 100; i++)
-		{
-			if(this.mTileIncrementX == 11)
+		{		
+			// If the tile's x is == to the 10th tile
+			if(this.mTileIncrementX == 10)
 			{
-				this.mTileIncrementX = 0;
+				// decrease it to 9 so it doesnt go off the board
+				this.mTileIncrementX = 9;
+				// increase the Y by 1 as it goes up to the next row
+				this.mTileIncrementY++;
+				// activate reversal of array from right to left
+				this.mReversingBoard = true;
+			}
+			// if the tile's x = to -1 and the tile is in the reversed row
+			if(this.mTileIncrementX == -1 && this.mReversingBoard == true)
+			{
+				// increase the titl's x to stop from going of the edge of the board
+				this.mTileIncrementX++
+				// set the reversal bool back to going in the correct direction
+				this.mReversingBoard = false;
+				// go up on the y to the next row
 				this.mTileIncrementY++;
 			}
-			
+				
+			// used to get the top left of the tiles incrementally 
 			var tileMonitarX = parseInt(this.mTileIncrementX) * parseInt(this.mDimentions);
 			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentions);
 			
+			// create a tile on the board and insert it into an array (positions are realtive to the board sprite)
 			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 115 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 760 - parseInt(tileMonitarY));
-			this.mTileIncrementX++;
+			
+			// if the row on is not a reversed row then increment from left to right
+			if(this.mReversingBoard == false)
+			{
+				this.mTileIncrementX++;
+			}
+			else
+			{
+				// else increment from right to left
+				this.mTileIncrementX--;
+			}
 		}
 	}
 }
@@ -179,7 +209,7 @@ function InitialiseGame()
 	
 	boardArray = new CBoardRoadSafety(spriteBoard);
 	boardArray.mFillArray();
-	//alert(boardArray.mBoardArray[5].mPosY);
+	alert(boardArray.mBoardArray[1].mPosX);
 	
 	// Initialise the pieces objects
 	InitialisePieces();
