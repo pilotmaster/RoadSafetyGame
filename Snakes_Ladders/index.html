@@ -180,8 +180,27 @@
 				}
 				else if (curTurnPhase == ETurnPhase.REACT_TO_TILE)
 				{
+					// Check if the tile the player has landed on contains an alternate location
+					var curGridTile = boardArray.mBoardArray[playersList[curPlayer].mPlayerGridPos];
+					if (curGridTile.mHasAlternateDestination)
+					{
+						// Has an alternate destination - display a message
+						
+						// Move the player to the other location
+						playersList[curPlayer].mTargetGridPos = curGridTile.mAltDestinationIndex;
+						
+						// Set move amount to 1 and also change state to MOVING
+						amountToMove = 1;
+						curTurnPhase = ETurnPhase.MOVING;
+					}
+					else
+					{
+						// Go to the next player
+						curTurnPhase = ETurnPhase.NEXT_PLAYER;
+					}
+				
 					// TO DO: just move to next player
-					curTurnPhase = ETurnPhase.NEXT_PLAYER;
+					//curTurnPhase = ETurnPhase.NEXT_PLAYER;
 				}
 				else if (curTurnPhase == ETurnPhase.NEXT_PLAYER)
 				{

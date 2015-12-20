@@ -30,6 +30,7 @@ var EPieceColours =
 	BLUE: 5, GREEN: 6, YELLOW: 7, BLACK: 8, WHITE: 9
 };
 
+
 // Button class - handles the interaction of button objects
 function Button(sprite, buttonType)
 {
@@ -138,7 +139,7 @@ function CPlayer(piece)
 			this.mTargetGridPos++;
 			this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
 			this.mLerpTime = 0;
-		}		
+		}	
 	}
 	
 	// Function to render this player
@@ -153,6 +154,17 @@ function CBoardTile(posX, posY)
 {
 	this.mPosX = posX;
 	this.mPosY = posY;
+	this.mHasAlternateDestination = false;
+	this.mAltDestinationIndex;
+	this.mMessage;
+	
+	// Function to set an alternate destination along with message
+	this.SetAltDestination = function(altIndex, message)
+	{
+		this.mHasAlternateDestination = true;
+		this.mAltDestinationIndex = altIndex;
+		this.mMessage = message;
+	}
 }
 
 function CBoardRoadSafety(board)
@@ -208,6 +220,26 @@ function CBoardRoadSafety(board)
 				this.mTileIncrementX--;
 			}
 		}
+		
+		// Insert whether a tile moves to another tile
+		this.mBoardArray[0].SetAltDestination(21, "You hold hands as you walked along.");
+		this.mBoardArray[6].SetAltDestination(25, "You kept looking and listening as you crossed the road.");
+		this.mBoardArray[8].SetAltDestination(10, "You put your ball in a bag to carry to the park.");
+		this.mBoardArray[20].SetAltDestination(15, "You played with a ball on the pavement!");
+		this.mBoardArray[30].SetAltDestination(51, "You crossed the road at the zebra crossing.");
+		this.mBoardArray[35].SetAltDestination(2, "You did not look and listen for traffic!");
+		this.mBoardArray[37].SetAltDestination(61, "You kept holding hands as you looked in the shop window.");
+		this.mBoardArray[46].SetAltDestination(88, "You waited until you saw the green man showing on the pelican crossing.");
+		this.mBoardArray[52].SetAltDestination(29, "You did not hold hands as you crossed the road!");
+		this.mBoardArray[54].SetAltDestination(24, "You nearly crossed the road when the red man was showing on the pelican!");
+		this.mBoardArray[55].SetAltDestination(63, "You hold hands as you crossed the road.");
+		this.mBoardArray[57].SetAltDestination(12, "You ran along the pavement near the kerb!");
+		this.mBoardArray[79].SetAltDestination(98, "You rode your bike on the cycle path.");
+		this.mBoardArray[82].SetAltDestination(38, "You set off to get your ball when it rolled in the road!");
+		this.mBoardArray[85].SetAltDestination(93, "You kept well away from the kerb when walking.");
+		this.mBoardArray[87].SetAltDestination(65, "You started to cross the road when the green man was flashing at the pelican!");
+		this.mBoardArray[90].SetAltDestination(68, "You and your friend pushed each other near the road!");
+		this.mBoardArray[96].SetAltDestination(66, "You started to cross the road before you made sure the traffic had stopped!");
 	}
 }
 
