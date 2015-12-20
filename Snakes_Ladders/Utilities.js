@@ -95,37 +95,49 @@ function CPlayer(piece)
 	this.mPiece = piece;
 	this.mTargetGridPos = 0;
 	this.mPlayerGridPos;
+	this.mLerpSpeed = 0.00005;
+	this.mLerpTime = 0;
 	
 	// Move function for the player object
 	this.Move = function()
 	{
-		if (this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
-		{
-			if (this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
-			{
-				this.mPiece.mSprite.mDrawPosX += 1;
-			}
-			else
-			{
-				this.mPiece.mSprite.mDrawPosX -= 1;
-			}
-		}
-		if (this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
-		{
-			if (this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
-			{
-				this.mPiece.mSprite.mDrawPosY += 1;
-			}
-			else
-			{
-				this.mPiece.mSprite.mDrawPosY -= 1;
-			}				
-		}		
+		//if (this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
+		//{
+		//	if (this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
+		//	{
+		//		this.mPiece.mSprite.mDrawPosX += 1;
+		//	}
+		//	else
+		//	{
+		//		this.mPiece.mSprite.mDrawPosX -= 1;
+		//	}
+		//}
+		//if (this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+		//{
+		//	if (this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+		//	{
+		//		this.mPiece.mSprite.mDrawPosY += 1;
+		//	}
+		//	else
+		//	{
+		//		this.mPiece.mSprite.mDrawPosY -= 1;
+		//	}				
+		//}
+		
+		// Increment the lerp time
+		this.mLerpTime += frameTime * this.mLerpSpeed;
+		
+		// Lerp to the next position with both X and Y co-ordinates
+		this.mPiece.mSprite.mDrawPosX = LerpToVal(this.mPiece.mSprite.mDrawPosX, boardArray.mBoardArray[this.mTargetGridPos].mPosX, frameTime * this.mLerpTime);
+		this.mPiece.mSprite.mDrawPosY = LerpToVal(this.mPiece.mSprite.mDrawPosY, boardArray.mBoardArray[this.mTargetGridPos].mPosY, frameTime * this.mLerpTime);
+		
+		// Check if the player has reached their destination
 		if (this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mTargetGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mTargetGridPos].mPosY)
 		{
 			amountToMove = amountToMove - 1;
 			this.mTargetGridPos++;
 			this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
+			this.mLerpTime = 0;
 		}		
 	}
 	
@@ -243,5 +255,16 @@ function LerpToVal(startVal, endVal, time)
 	time = time < 0 ? 0 : time;
 	time = time > 1 ? 1 : time;
 	// Return the lerp value
-	return parseInt(startVal) + parseInt((endVal - startVal)) * time;
+	var newVal = parseInt(startVal) + parseInt((endVal - startVal)) * time;
+	
+	// Check if the new value is 'close enough'
+	var dist = Math.abs(endVal - newVal);
+	if (dist <= 5)
+	{
+		return endVal;
+	}
+	else
+	{
+		return newVal;
+	}
 }

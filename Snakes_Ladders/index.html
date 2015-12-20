@@ -48,7 +48,7 @@
 		<!-- Run-time game data -->
 		frames = 0,
 		curPlayer = 0,
-		numPlayers = 1,
+		numPlayers = 2,
 		playersList,
 		buttonsAmount = 2,
 		buttonsArray = new Array(buttonsAmount),
@@ -220,7 +220,6 @@
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
-				testImage.Draw(context, testImage.mWidth, testImage.mHeight);
 				
 				// Render each player
 				for (i = 0; i < numPlayers; i++)
