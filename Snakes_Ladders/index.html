@@ -52,6 +52,10 @@
 		playersList,
 		buttonsAmount = 2,
 		buttonsArray = new Array(buttonsAmount),
+		
+		frameTime,
+		timeNow,
+		timeBefore = new Date().getTime(),
 
 		<!-- Game state data -->
 		curState,
@@ -65,6 +69,7 @@
 			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, NEXT_PLAYER: 4
 		},
 		curTurnPhase = ETurnPhase.WAITING;
+		
 			
 		<!-- FUNCTIONS -->
 		function Main()
@@ -126,63 +131,72 @@
 		
 		function Update()
 		{
+			// Get the frame time
+			timeNow = new Date().getTime();
+			frameTime = timeNow - timeBefore;
+			timeBefore = timeNow;
+			
 			// Increment the number of frames passed
 			frames++;
 			
-			// Check if it is in the rolling dice phase
-			if (curTurnPhase == ETurnPhase.ROLLING_DICE && frames % 8 == 0)
+			// Validate the current game state
+			if (curState == EStates.GAME)
 			{
-				// Check if it has 0 rolls left
-				if (diceRolls <= 0)
+				// TESTING LERP FUNCTION
+				//testImage.mDrawPosX = LerpToVal(testImage.mDrawPosX, 600, frameTime * 0.005);
+			
+				// Check if it is in the rolling dice phase
+				if (curTurnPhase == ETurnPhase.ROLLING_DICE && frames % 8 == 0)
 				{
-					// It has finished rolling the dice - move to next phase
-					curTurnPhase = ETurnPhase.MOVING;
+					// Check if it has 0 rolls left
+					if (diceRolls <= 0)
+					{
+						// It has finished rolling the dice - move to next phase
+						curTurnPhase = ETurnPhase.MOVING;
+					}
+					else
+					{
+						// Decrease number of rolls left to do
+						diceRolls = diceRolls - 1;
+						
+						// Get a new random dice number
+						diceNum = Math.floor((Math.random() * 6));
+						amountToMove = diceNum + 1;
+					}
 				}
-				else
+				else if (curTurnPhase == ETurnPhase.MOVING)
 				{
-					// Decrease number of rolls left to do
-					diceRolls = diceRolls - 1;
+					// Check the amount left to move
+					if (amountToMove > 0)
+					{
+						// Move the current player
+						playersList[curPlayer].Move();
+					}
+					else
+					{
+						// Set to the next phase
+						curTurnPhase = ETurnPhase.REACT_TO_TILE;
+					}
+				}
+				else if (curTurnPhase == ETurnPhase.REACT_TO_TILE)
+				{
+					// TO DO: just move to next player
+					curTurnPhase = ETurnPhase.NEXT_PLAYER;
+				}
+				else if (curTurnPhase == ETurnPhase.NEXT_PLAYER)
+				{
+					// Increment to the next player
+					curPlayer += 1;
 					
-					// Get a new random dice number
-					diceNum = Math.floor((Math.random() * 6));
-					amountToMove = diceNum + 1;
-				}
-			}
-			else if (curTurnPhase == ETurnPhase.MOVING && frames % 1 == 0)
-			{
-				// Check the amount left to move
-				if (amountToMove > 0)
-				{
-					// Move the current player
-					playersList[curPlayer].Move();
+					// Check if it should loop back round to player 1
+					if (curPlayer == numPlayers)
+					{
+						curPlayer = 0;
+					}
 					
-					// Decrement move amount
-					//amountToMove = amountToMove - 1;
+					// Set the state to waiting
+					curTurnPhase = ETurnPhase.WAITING;
 				}
-				else
-				{
-					// Set to the next phase
-					curTurnPhase = ETurnPhase.REACT_TO_TILE;
-				}
-			}
-			else if (curTurnPhase == ETurnPhase.REACT_TO_TILE)
-			{
-				// TO DO: just move to next player
-				curTurnPhase = ETurnPhase.NEXT_PLAYER;
-			}
-			else if (curTurnPhase == ETurnPhase.NEXT_PLAYER)
-			{
-				// Increment to the next player
-				curPlayer += 1;
-				
-				// Check if it should loop back round to player 1
-				if (curPlayer == numPlayers)
-				{
-					curPlayer = 0;
-				}
-				
-				// Set the state to waiting
-				curTurnPhase = ETurnPhase.WAITING;
 			}
 		}
 		
@@ -206,6 +220,7 @@
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
+				testImage.Draw(context, testImage.mWidth, testImage.mHeight);
 				
 				// Render each player
 				for (i = 0; i < numPlayers; i++)

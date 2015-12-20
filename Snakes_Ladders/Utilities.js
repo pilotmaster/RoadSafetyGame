@@ -95,37 +95,38 @@ function CPlayer(piece)
 	this.mPiece = piece;
 	this.mTargetGridPos = 0;
 	this.mPlayerGridPos;
+	
 	// Move function for the player object
 	this.Move = function()
 	{
-			if(this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
+		if (this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
+		{
+			if (this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
 			{
-				if(this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
-				{
-					this.mPiece.mSprite.mDrawPosX += 1;
-				}
-				else
-				{
-					this.mPiece.mSprite.mDrawPosX -= 1;
-				}
+				this.mPiece.mSprite.mDrawPosX += 1;
 			}
-			if(this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+			else
 			{
-				if(this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
-				{
-					this.mPiece.mSprite.mDrawPosY += 1;
-				}
-				else
-				{
-					this.mPiece.mSprite.mDrawPosY -= 1;
-				}				
-			}		
-			if(this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mTargetGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+				this.mPiece.mSprite.mDrawPosX -= 1;
+			}
+		}
+		if (this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+		{
+			if (this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
 			{
-				amountToMove = amountToMove - 1;
-				this.mTargetGridPos++;
-				this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
-			}		
+				this.mPiece.mSprite.mDrawPosY += 1;
+			}
+			else
+			{
+				this.mPiece.mSprite.mDrawPosY -= 1;
+			}				
+		}		
+		if (this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mTargetGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+		{
+			amountToMove = amountToMove - 1;
+			this.mTargetGridPos++;
+			this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
+		}		
 	}
 	
 	// Function to render this player
@@ -209,7 +210,6 @@ function InitialiseGame()
 	
 	boardArray = new CBoardRoadSafety(spriteBoard);
 	boardArray.mFillArray();
-	alert(boardArray.mBoardArray[1].mPosX);
 	
 	// Initialise the pieces objects
 	InitialisePieces();
@@ -233,4 +233,15 @@ function InitialisePieces()
 	{
 		piecesList[i] = new CPiece(spritePieces[i], i);
 	}
+}
+
+
+// Lerping function
+function LerpToVal(startVal, endVal, time)
+{
+	// Check if time is less than 0 or greater than 1
+	time = time < 0 ? 0 : time;
+	time = time > 1 ? 1 : time;
+	// Return the lerp value
+	return parseInt(startVal) + parseInt((endVal - startVal)) * time;
 }

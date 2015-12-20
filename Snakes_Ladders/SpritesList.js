@@ -12,6 +12,7 @@ spritePieces = new Array(10),
 
 //** MAIN MENU DATA **//
 title,
+testImage,
 playButton;
 
 // Declare the Sprite class
@@ -94,4 +95,6 @@ function LoadSprites(board)
 	spritePieces[7] = new CSprite(sheetImage, 882, 73, 69, 54, 5, 840);
 	spritePieces[8] = new CSprite(sheetImage, 969, 73, 69, 54, 5, 920);
 	spritePieces[9] = new CSprite(sheetImage, 1056, 73, 69, 54, 5, 1000);
+	
+	testImage = new CSprite(sheetImage, 8, 13, 221, 214, 5, 800);
 }
