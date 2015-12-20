@@ -207,7 +207,7 @@ function CBoardRoadSafety(board)
 			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentions);
 			
 			// create a tile on the board and insert it into an array (positions are realtive to the board sprite)
-			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 11 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 760 - parseInt(tileMonitarY));
+			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 116 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 760 - parseInt(tileMonitarY));
 			
 			// if the row on is not a reversed row then increment from left to right
 			if(this.mReversingBoard == false)
