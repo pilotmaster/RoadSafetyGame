@@ -51,7 +51,7 @@ function LoadMenuSprites()
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
 	
 	// Button Image
-	rollDiceButton = new CSprite(sheetImage, 47, 1111, 221, 214, 5, 5);
+	rollDiceButton = new CSprite(sheetImage, 47, 1111, 221, 214, 4, 4);
 	
 	for(var i = 0; i < 6; i++)
 	{
