@@ -81,6 +81,73 @@ function CPiece(sprite, colour)
 	this.mColour = colour;
 	this.mBeenChosen = false;
 	
+	// Function to draw a 'light' behind a piece
+	this.DrawLight = function()
+	{
+		// Save the context before continuing
+		context.save();
+		
+		// Determine the position of the light
+		var lightX = parseInt(this.mSprite.mDrawPosX) + parseInt((this.mSprite.mWidth / 2));
+		var lightY = parseInt(this.mSprite.mDrawPosY) + parseInt((this.mSprite.mHeight / 2));;
+		
+		// Determine the colour of the light
+		var rgbColourString;
+		var transparency = 0.75;
+		switch (this.mColour)
+		{
+			case EPieceColours.RED:
+				rgbColourString = "rgba(190, 85, 80, " + transparency + ")";
+				break;
+			case EPieceColours.ORANGE:
+				rgbColourString = "rgba(190, 136, 84, " + transparency + ")";
+				break;
+			case EPieceColours.LILAC:
+				rgbColourString = "rgba(171, 88, 192, " + transparency + ")";
+				break;
+			case EPieceColours.CYAN:
+				rgbColourString = "rgba(92, 192, 161, " + transparency + ")";
+				break;
+			case EPieceColours.PURPLE:
+				rgbColourString = "rgba(145, 89, 192, " + transparency + ")";
+				break;
+			case EPieceColours.BLUE:
+				rgbColourString = "rgba(92, 101, 193, " + transparency + ")";
+				break;
+			case EPieceColours.GREEN:
+				rgbColourString = "rgba(101, 193, 92, " + transparency + ")";
+				break;
+			case EPieceColours.YELLOW:
+				rgbColourString = "rgba(193, 184, 92, " + transparency + ")";
+				break;
+			case EPieceColours.BLACK:
+				rgbColourString = "rgba(84, 86, 86, " + transparency + ")";
+				break;
+			case EPieceColours.WHITE:
+				rgbColourString = "rgba(193, 193, 193, " + transparency + ")";
+				break;
+			default:
+				rgbColourString = "rgba(190, 85, 80, " + transparency + ")";
+				break;
+		}
+		
+		// The size of the light
+		var lightSize = 60;
+		
+		// Create the gradient
+		var light = context.createRadialGradient(lightX, lightY, lightSize / 1.9, lightX, lightY, lightSize);
+		light.addColorStop(0, rgbColourString);
+		light.addColorStop(1, "transparent");
+		
+		// Set the context state for transparent rendering
+		context.globalCompositeOperation = "additive";
+		context.fillStyle = light;
+		context.fillRect(0, 0, width, height);
+		
+		// Restore the context state
+		context.restore();
+	}
+	
 	// Function to render this piece
 	this.Render = function(context)
 	{
@@ -102,29 +169,6 @@ function CPlayer(piece)
 	// Move function for the player object
 	this.Move = function()
 	{
-		//if (this.mPiece.mSprite.mDrawPosX != boardArray.mBoardArray[this.mTargetGridPos].mPosX)
-		//{
-		//	if (this.mPiece.mSprite.mDrawPosX < boardArray.mBoardArray[this.mTargetGridPos].mPosX)
-		//	{
-		//		this.mPiece.mSprite.mDrawPosX += 1;
-		//	}
-		//	else
-		//	{
-		//		this.mPiece.mSprite.mDrawPosX -= 1;
-		//	}
-		//}
-		//if (this.mPiece.mSprite.mDrawPosY != boardArray.mBoardArray[this.mTargetGridPos].mPosY)
-		//{
-		//	if (this.mPiece.mSprite.mDrawPosY < boardArray.mBoardArray[this.mTargetGridPos].mPosY)
-		//	{
-		//		this.mPiece.mSprite.mDrawPosY += 1;
-		//	}
-		//	else
-		//	{
-		//		this.mPiece.mSprite.mDrawPosY -= 1;
-		//	}				
-		//}
-		
 		// Increment the lerp time
 		this.mLerpTime += frameTime * this.mLerpSpeed;
 		

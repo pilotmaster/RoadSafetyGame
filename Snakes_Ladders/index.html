@@ -48,7 +48,7 @@
 		<!-- Run-time game data -->
 		frames = 0,
 		curPlayer = 0,
-		numPlayers = 2,
+		numPlayers = 6,
 		playersList,
 		buttonsAmount = 2,
 		buttonsArray = new Array(buttonsAmount),
@@ -246,6 +246,9 @@
 				
 				// Draw the current dice number
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
+				
+				// Draw the light for the current player
+				playersList[curPlayer].mPiece.DrawLight();
 				
 				// Render each player
 				for (i = 0; i < numPlayers; i++)
