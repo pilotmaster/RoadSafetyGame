@@ -73,7 +73,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.PlayerSelection)
 			{
-				numPlayers = this.mPlayersNumber;
+				if (curState == EStates.SPLASH)
+				{
+					numPlayers = this.mPlayersNumber;
+				}
 				
 			}
 		}

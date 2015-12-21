@@ -35,7 +35,6 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 	}
 }
 
-
 // Function to load the initial main menu sprites
 function LoadMenuSprites()
 {
