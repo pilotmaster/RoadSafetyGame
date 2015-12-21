@@ -142,10 +142,10 @@ function CPiece(sprite, colour)
 		}
 		
 		// The size of the gloaw
-		var glowSize = 60;
+		var glowSize = 45;
 		
 		// Create the gradient
-		var glow = context.createRadialGradient(lightX, lightY, glowSize / 1.9, lightX, lightY, glowSize);
+		var glow = context.createRadialGradient(lightX, lightY, glowSize / 1.5, lightX, lightY, glowSize);
 		glow.addColorStop(0, rgbColourString);
 		glow.addColorStop(1, "transparent");
 		
