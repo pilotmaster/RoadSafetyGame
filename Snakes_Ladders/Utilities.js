@@ -20,7 +20,7 @@ boardArray,
 // Enumeration of button types
 EbuttonType =
 {
-	RollDice: 0, StartGame: 2
+	RollDice: 0, StartGame: 2, PlayerSelection: 3
 };
 
 // Enumeration of all the colours of the pieces
@@ -32,12 +32,13 @@ var EPieceColours =
 
 
 // Button class - handles the interaction of button objects
-function Button(sprite, buttonType)
+function Button(sprite, buttonType, selectedPlayerNumber)
 {
 	// Type of button
 	this.mButtonType = buttonType;
 	// The sprite that will be used for the button
 	this.mSprite = sprite;
+	this.mPlayersNumber = selectedPlayerNumber;
 	
 	// Function to handle what occurs when this button is clicked
 	this.BeenClicked = function()
@@ -68,6 +69,12 @@ function Button(sprite, buttonType)
 					// Determine how many jumps the dice does before settling on a number
 					diceRolls = Math.floor((Math.random() * 15)) + 5;
 				}
+			}
+			
+			if (this.mButtonType == EbuttonType.PlayerSelection)
+			{
+				numPlayers = this.mPlayersNumber;
+				
 			}
 		}
 	}

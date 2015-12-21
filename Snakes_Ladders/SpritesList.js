@@ -12,7 +12,8 @@ spritePieces = new Array(10),
 
 //** MAIN MENU DATA **//
 title,
-playButton;
+playButton,
+playersSelectionSprite = new Array(6);
 
 // Declare the Sprite class
 function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
@@ -48,10 +49,15 @@ function LoadMenuSprites()
 	sheetImage.src = "res/SpriteSheet.png";
 	
 	// Play button for main menu
-	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 700, 450);
+	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
 	
 	// Button Image
 	rollDiceButton = new CSprite(sheetImage, 47, 1111, 221, 214, 5, 5);
+	
+	for(var i = 0; i < 6; i++)
+	{
+		playersSelectionSprite[i] = new CSprite(sheetImage, 47, 1111, 221, 214, 20 + (i * 300), 300);
+	}
 }
 
 
