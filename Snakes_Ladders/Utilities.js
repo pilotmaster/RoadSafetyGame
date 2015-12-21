@@ -81,17 +81,17 @@ function CPiece(sprite, colour)
 	this.mColour = colour;
 	this.mBeenChosen = false;
 	
-	// Function to draw a 'light' behind a piece
-	this.DrawLight = function()
+	// Function to draw a glow behind a piece
+	this.DrawGlow = function()
 	{
 		// Save the context before continuing
 		context.save();
 		
-		// Determine the position of the light
+		// Determine the position of the glow
 		var lightX = parseInt(this.mSprite.mDrawPosX) + parseInt((this.mSprite.mWidth / 2));
 		var lightY = parseInt(this.mSprite.mDrawPosY) + parseInt((this.mSprite.mHeight / 2));;
 		
-		// Determine the colour of the light
+		// Determine the colour of the glow
 		var rgbColourString;
 		var transparency = 0.75;
 		switch (this.mColour)
@@ -131,17 +131,17 @@ function CPiece(sprite, colour)
 				break;
 		}
 		
-		// The size of the light
-		var lightSize = 60;
+		// The size of the gloaw
+		var glowSize = 60;
 		
 		// Create the gradient
-		var light = context.createRadialGradient(lightX, lightY, lightSize / 1.9, lightX, lightY, lightSize);
-		light.addColorStop(0, rgbColourString);
-		light.addColorStop(1, "transparent");
+		var glow = context.createRadialGradient(lightX, lightY, glowSize / 1.9, lightX, lightY, glowSize);
+		glow.addColorStop(0, rgbColourString);
+		glow.addColorStop(1, "transparent");
 		
 		// Set the context state for transparent rendering
 		context.globalCompositeOperation = "additive";
-		context.fillStyle = light;
+		context.fillStyle = glow;
 		context.fillRect(0, 0, width, height);
 		
 		// Restore the context state

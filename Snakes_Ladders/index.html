@@ -247,15 +247,20 @@
 				// Draw the current dice number
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
 				
-				// Draw the light for the current player
-				playersList[curPlayer].mPiece.DrawLight();
-				
 				// Render each player
 				for (i = 0; i < numPlayers; i++)
 				{
-					// Call the render function for the given player
-					playersList[i].Render(context);
+					// Call the render function for the given player - as long as it is not the current player
+					if (i != curPlayer)
+					{
+						playersList[i].Render(context);
+					}
 				}
+				
+				// Draw the glow and sprite for the current player
+				// Current player drawn last so it appears above all other players
+				playersList[curPlayer].mPiece.DrawGlow();
+				playersList[curPlayer].Render(context);
 			}
 		}
 		
