@@ -237,7 +237,14 @@
 				// Order of drawing is important. Anything new drawn replaces anything old drawn
 				// Start by drawing the board of the game
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
-				rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
+				
+				// Only draw the dice button when in the waiting phase
+				if (curTurnPhase == ETurnPhase.WAITING)
+				{
+					rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
+				}
+				
+				// Draw the current dice number
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
 				
 				// Render each player
