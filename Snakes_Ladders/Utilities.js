@@ -161,28 +161,33 @@ function CPiece(sprite, colour)
 function CPlayer(piece)
 {
 	this.mPiece = piece;
-	this.mTargetGridPos = 0;
-	this.mPlayerGridPos;
+	this.mPlayerGridPos = 0;
 	this.mLerpSpeed = 0.00005;
 	this.mLerpTime = 0;
 	
 	// Move function for the player object
 	this.Move = function()
 	{
+		if(this.mPlayerGridPos == 100)
+		{
+				curState = EStates.WINNER;
+				alert("Winner Winner Chicken Dinner");
+				return;
+		}
+		
 		// Increment the lerp time
 		this.mLerpTime += frameTime * this.mLerpSpeed;
 		
 		// Lerp to the next position with both X and Y co-ordinates
-		this.mPiece.mSprite.mDrawPosX = LerpToVal(this.mPiece.mSprite.mDrawPosX, boardArray.mBoardArray[this.mTargetGridPos].mPosX, frameTime * this.mLerpTime);
-		this.mPiece.mSprite.mDrawPosY = LerpToVal(this.mPiece.mSprite.mDrawPosY, boardArray.mBoardArray[this.mTargetGridPos].mPosY, frameTime * this.mLerpTime);
+		this.mPiece.mSprite.mDrawPosX = LerpToVal(this.mPiece.mSprite.mDrawPosX, boardArray.mBoardArray[this.mPlayerGridPos].mPosX, frameTime * this.mLerpTime);
+		this.mPiece.mSprite.mDrawPosY = LerpToVal(this.mPiece.mSprite.mDrawPosY, boardArray.mBoardArray[this.mPlayerGridPos].mPosY, frameTime * this.mLerpTime);
 		
 		// Check if the player has reached their destination
-		if (this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mTargetGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mTargetGridPos].mPosY)
+		if (this.mPiece.mSprite.mDrawPosX == boardArray.mBoardArray[this.mPlayerGridPos].mPosX && this.mPiece.mSprite.mDrawPosY == boardArray.mBoardArray[this.mPlayerGridPos].mPosY)
 		{
 			amountToMove = amountToMove - 1;
-			this.mTargetGridPos++;
-			this.mPlayerGridPos = parseInt(this.mTargetGridPos - 1);
-			this.mLerpTime = 0;
+			this.mPlayerGridPos++;
+			this.mLerpTime = 0;			
 		}	
 	}
 	
