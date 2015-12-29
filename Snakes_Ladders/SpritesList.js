@@ -9,6 +9,7 @@ rollDiceButton,
 // array of the different dice images
 spriteDice = new Array(6),
 spritePieces = new Array(10),
+spriteMessageBox,
 
 //** MAIN MENU DATA **//
 title,
@@ -97,4 +98,7 @@ function LoadSprites(board)
 	spritePieces[7] = new CSprite(sheetImage, 882, 73, 69, 54, 5, 840);
 	spritePieces[8] = new CSprite(sheetImage, 969, 73, 69, 54, 5, 920);
 	spritePieces[9] = new CSprite(sheetImage, 1056, 73, 69, 54, 5, 1000);
+	
+	// Message box sprite
+	spriteMessageBox = new CSprite(sheetImage, 805, 188, 985, 645, 500, 500);
 }

@@ -84,11 +84,10 @@
 			height = window.innerHeight;
 			canvas.width = width;
 			canvas.height = height;
-			//canvas.style.border = "1px solid #000";
 			context = canvas.getContext("2d");
 			
 			// Set the background colour
-			context.fillStyle = "#000000";			
+			context.fillStyle = "#000000";
 			
 			// Event handler
 			elemLeft = canvas.offsetLeft;
@@ -151,9 +150,6 @@
 			// Validate the current game state
 			if (curState == EStates.GAME)
 			{
-				// TESTING LERP FUNCTION
-				//testImage.mDrawPosX = LerpToVal(testImage.mDrawPosX, 600, frameTime * 0.005);
-			
 				// Check if it is in the rolling dice phase
 				if (curTurnPhase == ETurnPhase.ROLLING_DICE && frames % 8 == 0)
 				{
@@ -196,7 +192,7 @@
 						// Has an alternate destination - display a message
 						
 						// Move the player to the other location
-						playersList[curPlayer].mTargetGridPos = curGridTile.mAltDestinationIndex;
+						playersList[curPlayer].mTargetPos = curGridTile.mAltDestinationIndex;
 						
 						// Set move amount to 1 and also change state to MOVING
 						amountToMove = 1;
