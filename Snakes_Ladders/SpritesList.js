@@ -100,5 +100,5 @@ function LoadSprites(board)
 	spritePieces[9] = new CSprite(sheetImage, 1056, 73, 69, 54, 5, 1000);
 	
 	// Message box sprite
-	spriteMessageBox = new CSprite(sheetImage, 805, 188, 985, 645, 500, 500);
+	spriteMessageBox = new CSprite(sheetImage, 805, 188, 985, 645, 400, 200);
 }

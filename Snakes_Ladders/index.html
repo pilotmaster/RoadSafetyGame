@@ -67,7 +67,7 @@
 		
 		ETurnPhase =
 		{
-			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, NEXT_PLAYER: 4
+			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, READ_MESSAGE: 4, NEXT_PLAYER: 5
 		},
 		curTurnPhase = ETurnPhase.WAITING;
 		//ssdsd sd
@@ -109,6 +109,24 @@
 					buttonsArray[i].BeenClicked();
 				}
 			}, false);
+			
+			// Event listener for a key press
+			document.onkeypress = function(event)
+			{
+				// Determine what button was pressed
+				pressedKey = String.fromCharCode(event.keyCode || event.charCode);
+				
+				// Determine the state of the game
+				if (curState == EStates.GAME)
+				{
+					// Determine the phase of the current turn
+					if (curTurnPhase == ETurnPhase.READ_MESSAGE)
+					{
+						// Any key press will close the message box - simply make the state to be moving
+						curTurnPhase = ETurnPhase.MOVING;
+					}
+				}
+			};
 			
 			// array for buttons 
 			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice, 0);
@@ -196,16 +214,13 @@
 						
 						// Set move amount to 1 and also change state to MOVING
 						amountToMove = 1;
-						curTurnPhase = ETurnPhase.MOVING;
+						curTurnPhase = ETurnPhase.READ_MESSAGE;
 					}
 					else
 					{
 						// Go to the next player
 						curTurnPhase = ETurnPhase.NEXT_PLAYER;
 					}
-				
-					// TO DO: just move to next player
-					//curTurnPhase = ETurnPhase.NEXT_PLAYER;
 				}
 				else if (curTurnPhase == ETurnPhase.NEXT_PLAYER)
 				{
@@ -256,7 +271,7 @@
 				
 				// Draw the current dice number
 				spriteDice[diceNum].Draw(context, spriteDice[diceNum].mWidth, spriteDice[diceNum].mHeight);
-				
+
 				// Render each player
 				for (i = 0; i < numPlayers; i++)
 				{
@@ -271,6 +286,12 @@
 				// Current player drawn last so it appears above all other players
 				playersList[curPlayer].mPiece.DrawGlow();
 				playersList[curPlayer].Render(context);
+				
+				// Draw the message box on top of everything else if in the correct phase
+				if (curTurnPhase == ETurnPhase.READ_MESSAGE)
+				{
+					spriteMessageBox.Draw(context, spriteMessageBox.mWidth, spriteMessageBox.mHeight);
+				}
 			}
 		}
 		
