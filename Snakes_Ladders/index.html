@@ -26,12 +26,34 @@
 			border: 8px solid #f;
 			margin: 0 auto;			
 		}
+		
+		#message
+		{
+			position: absolute;
+			left: 932px;
+			top: 200px;
+			font-family: Calibri, sans-serif;
+		}
+		
+		#message.title
+		{
+			font-weight: bold;
+			font-size: 12px;
+		}
+		
+		#message p
+		{
+			
+		}
 		</style>
 	</head>
 	<body>
-	
-	<canvas id="my_canvas"></canvas>
-	
+		<canvas id="my_canvas">Canvas not supported in your browser.</canvas>
+		
+		<div id = 'message'>
+			<h1 id = 'MessageBoxTitle', class='title'></h2>
+		</div>
+		
 		<script>
 		
 		<!-- JavaScript section -->
@@ -57,6 +79,8 @@
 		frameTime,
 		timeNow,
 		timeBefore = new Date().getTime(),
+		
+		messageBoxTitle,
 
 		<!-- Game state data -->
 		curState,
@@ -70,7 +94,6 @@
 			WAITING: 0, ROLLING_DICE: 1, MOVING: 2, REACT_TO_TILE: 3, READ_MESSAGE: 4, NEXT_PLAYER: 5
 		},
 		curTurnPhase = ETurnPhase.WAITING;
-		//ssdsd sd
 			
 		<!-- FUNCTIONS -->
 		function Main()
@@ -122,6 +145,9 @@
 					// Determine the phase of the current turn
 					if (curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
+						// Set message box title to be nothing
+						messageBoxTitle.textContent = "";
+						
 						// Any key press will close the message box - simply make the state to be moving
 						curTurnPhase = ETurnPhase.MOVING;
 					}
@@ -139,6 +165,9 @@
 				buttonsArray[buttonIndexCarryOn] = new Button(playersSelectionSprite[i], EbuttonType.PlayerSelection, i+1);
 				buttonIndexCarryOn++;
 			}
+			
+			// Get the moessage box data
+			messageBoxTitle = document.getElementById("MessageBoxTitle");
 			
 			Run();
 		}
@@ -207,8 +236,9 @@
 					var curGridTile = boardArray.mBoardArray[playersList[curPlayer].mPlayerGridPos];
 					if (curGridTile.mHasAlternateDestination)
 					{
-						// Has an alternate destination - display a message
-						
+						// Set the message title
+						messageBoxTitle.textContent = "This Is Title!";
+					
 						// Move the player to the other location
 						playersList[curPlayer].mTargetPos = curGridTile.mAltDestinationIndex;
 						
