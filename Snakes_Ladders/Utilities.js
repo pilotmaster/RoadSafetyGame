@@ -91,6 +91,7 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
 						messageBoxTitle.style.borderWidth = "0px";
+						messageBoxMessage.style.borderWidth = "0px";
 							
 						// Any key press will close the message box - simply make the state to be moving
 						curTurnPhase = ETurnPhase.MOVING;					
