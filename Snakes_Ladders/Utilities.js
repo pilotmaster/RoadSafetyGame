@@ -81,9 +81,6 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.RemoveMessageBox)
 			{
-				// Determine the state of the game
-				if (curState == EStates.GAME)
-				{
 					if(curState == EStates.READ_MESSAGE)
 					{
 						// Set message box title to be nothing
@@ -94,7 +91,7 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 						
 						alert("ss");
 					}
-				}			
+							
 			}
 			
 		}
