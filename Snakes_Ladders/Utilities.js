@@ -284,7 +284,7 @@ function CBoardRoadSafety(board)
 		}
 		
 		// Insert whether a tile moves to another tile
-		this.mBoardArray[0].SetAltDestination(21, "You hold hands as you walked along.");
+		this.mBoardArray[0].SetAltDestination(21, "You held hands as you walked along.");
 		this.mBoardArray[6].SetAltDestination(25, "You kept looking and listening as you crossed the road.");
 		this.mBoardArray[8].SetAltDestination(10, "You put your ball in a bag to carry to the park.");
 		this.mBoardArray[20].SetAltDestination(15, "You played with a ball on the pavement!");

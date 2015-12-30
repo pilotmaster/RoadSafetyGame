@@ -30,19 +30,27 @@
 			#MessageBoxTitle
 			{
 				position: absolute;
-				left: 775px;
-				top: 250px;
-				margin: 10px;
+				left: 450px;
+				top: 210px;
+				width: 849px;
+				height: 100px;
 				font-family: Calibri, sans-serif;
 				font-weight: bold;
 				font-size: 64px;
-				border: solid rgba(0, 0, 0, 0.6);
+				text-align: center;
+				border: solid rgba(175, 110, 45, 1);
+				border-style: solid solid dotted solid;
+				border-width: 0px;
 			}
 			
 			#Message
 			{
 				position: absolute;
 				border: solid rgba(0, 0, 0, 0.6);
+				left: 575px;
+				top: 450px;
+				font-size: 32px;
+				text-align: left;
 			}
 		</style>
 	</head>
@@ -81,6 +89,7 @@
 		timeBefore = new Date().getTime(),
 		
 		messageBoxTitle,
+		messageBoxMessage,
 
 		<!-- Game state data -->
 		curState,
@@ -147,6 +156,8 @@
 					{
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
+						messageBoxMessage.textContent = "";
+						messageBoxTitle.style.borderWidth = "0px";
 						
 						// Any key press will close the message box - simply make the state to be moving
 						curTurnPhase = ETurnPhase.MOVING;
@@ -166,8 +177,9 @@
 				buttonIndexCarryOn++;
 			}
 			
-			// Get the moessage box data
+			// Get the message box data
 			messageBoxTitle = document.getElementById("MessageBoxTitle");
+			messageBoxMessage = document.getElementById("Message");
 			
 			Run();
 		}
@@ -236,8 +248,24 @@
 					var curGridTile = boardArray.mBoardArray[playersList[curPlayer].mPlayerGridPos];
 					if (curGridTile.mHasAlternateDestination)
 					{
-						// Set the message title
-						messageBoxTitle.textContent = "This Is Title!";
+						// Set the message title - determine if snake or ladder
+						if (playersList[curPlayer].mPlayerGridPos < curGridTile.mAltDestinationIndex)
+						{
+							messageBoxTitle.textContent = "Well Done!";
+							messageBoxTitle.style.color = "rgba(79, 181, 69, 1)";
+						}
+						else
+						{
+							messageBoxTitle.textContent = "Oh Dear!";
+							messageBoxTitle.style.color = "rgba(187, 76, 80, 1)";
+						}
+						
+						// Set the width of the border to be 5px
+						messageBoxTitle.style.borderWidth = "5px";
+						
+						
+						// Set the message to display
+						messageBoxMessage.textContent = curGridTile.mMessage;
 					
 						// Move the player to the other location
 						playersList[curPlayer].mTargetPos = curGridTile.mAltDestinationIndex;
