@@ -46,11 +46,13 @@
 			#Message
 			{
 				position: absolute;
-				border: solid rgba(0, 0, 0, 0.6);
-				left: 650px;
-				top: 450px;
-				width: 648px;
-				height: 400px;
+				border: solid rgba(175, 110, 45, 1);
+				border-style: dotted solid solid solid;
+				border-width: 0px;
+				left: 450px;
+				top: 350px;
+				width: 848px;
+				height: 200px;
 				font-size: 54px;
 				text-align: center;
 			}
@@ -160,6 +162,7 @@
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
 						messageBoxTitle.style.borderWidth = "0px";
+						messageBoxMessage.style.borderWidth = "0px";
 						
 					    //Any key press will close the message box - simply make the state to be moving
 						curTurnPhase = ETurnPhase.MOVING;
@@ -268,7 +271,7 @@
 						
 						// Set the width of the border to be 5px
 						messageBoxTitle.style.borderWidth = "5px";
-						
+						messageBoxMessage.style.borderWidth = "5px";
 						
 						// Set the message to display
 						messageBoxMessage.textContent = curGridTile.mMessage;
