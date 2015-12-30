@@ -73,7 +73,7 @@
 		curPlayer = 0,
 		numPlayers = 1,
 		playersList,
-		buttonsAmount = 8,
+		buttonsAmount = 9,
 		buttonsArray = new Array(buttonsAmount),
 		
 		frameTime,
@@ -134,37 +134,41 @@
 			}, false);
 			
 			// Event listener for a key press
-			document.onkeypress = function(event)
-			{
+			//document.onkeypress = function(event)
+			//{
 				// Determine what button was pressed
-				pressedKey = String.fromCharCode(event.keyCode || event.charCode);
+			//	pressedKey = String.fromCharCode(event.keyCode || event.charCode);
 				
 				// Determine the state of the game
-				if (curState == EStates.GAME)
-				{
+			//	if (curState == EStates.GAME)
+			//	{
 					// Determine the phase of the current turn
-					if (curTurnPhase == ETurnPhase.READ_MESSAGE)
-					{
+			//		if (curTurnPhase == ETurnPhase.READ_MESSAGE)
+			//		{
 						// Set message box title to be nothing
-						messageBoxTitle.textContent = "";
+			//			messageBoxTitle.textContent = "";
 						
 						// Any key press will close the message box - simply make the state to be moving
-						curTurnPhase = ETurnPhase.MOVING;
-					}
-				}
-			};
+			//			curTurnPhase = ETurnPhase.MOVING;
+			//		}
+			//	}
+			//};
 			
 			// array for buttons 
+			// roll dice button
 			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice, 0);
+			// play button
 			buttonsArray[1] = new Button(playButton, EbuttonType.StartGame, 0);
-			
+			// carry on from the back of the array
 			var buttonIndexCarryOn = 2;
-			
 			for(var i = 0; i < 6; i++)
 			{
+			    // player amount selection buttons
 				buttonsArray[buttonIndexCarryOn] = new Button(playersSelectionSprite[i], EbuttonType.PlayerSelection, i+1);
 				buttonIndexCarryOn++;
 			}
+			// messagebox exit button
+			buttonsArray[8] = new Button(spriteMessageBox, EbuttonType.RemoveMessageBox, 0);
 			
 			// Get the moessage box data
 			messageBoxTitle = document.getElementById("MessageBoxTitle");
@@ -321,6 +325,7 @@
 				if (curTurnPhase == ETurnPhase.READ_MESSAGE)
 				{
 					spriteMessageBox.Draw(context, spriteMessageBox.mWidth, spriteMessageBox.mHeight);
+					spriteMessageBoxButton.Draw(context, spriteMessageBoxButton.mWidth, spriteMessageBoxButton.mHeight);
 				}
 			}
 		}

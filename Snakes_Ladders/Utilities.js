@@ -20,7 +20,7 @@ boardArray,
 // Enumeration of button types
 EbuttonType =
 {
-	RollDice: 0, StartGame: 2, PlayerSelection: 3
+	RollDice: 0, StartGame: 2, PlayerSelection: 3, RemoveMessageBox: 4
 };
 
 // Enumeration of all the colours of the pieces
@@ -76,9 +76,27 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 				if (curState == EStates.SPLASH)
 				{
 					numPlayers = this.mPlayersNumber;
-				}
-				
+				}			
 			}
+			
+			if (this.mButtonType == EbuttonType.RemoveMessageBox)
+			{
+				// Determine the state of the game
+				if (curState == EStates.GAME)
+				{
+					if(curState == EStates.READ_MESSAGE)
+					{
+						// Set message box title to be nothing
+						messageBoxTitle.textContent = "";
+							
+						// Any key press will close the message box - simply make the state to be moving
+						curTurnPhase = ETurnPhase.MOVING;
+						
+						alert("ss");
+					}
+				}			
+			}
+			
 		}
 	}
 }
