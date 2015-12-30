@@ -41,14 +41,12 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 // Function to load the initial main menu sprites
 function LoadMenuSprites()
 {
-	// Splash Title
-	var titleImage = new Image();
-	titleImage.src = "res/SnakesTitle.jpg";
-	title = new CSprite(titleImage, 0, 0, 1000, 167, 500, 5);
-	
 	// Load the sprite sheet image
 	var sheetImage = new Image();
 	sheetImage.src = "res/SpriteSheet.png";
+	
+	// Load the main menu title
+	title = new CSprite(sheetImage, 0, 0, 0, 0, 0, 0);
 	
 	// Play button for main menu
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
@@ -59,11 +57,13 @@ function LoadMenuSprites()
 	// MessageBoxButton Sprite
 	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 221, 214, 1160, 630);
 	
-	
-	for(var i = 0; i < 6; i++)
-	{
-		playersSelectionSprite[i] = new CSprite(sheetImage, 47, 1111, 221, 214, 20 + (i * 300), 300);
-	}
+	// Player selection sprites
+	playersSelectionSprite[0] = new CSprite(sheetImage, 1382, 853, 145, 224, 20, 300);
+	playersSelectionSprite[1] = new CSprite(sheetImage, 42, 853, 145, 224, 320, 300);
+	playersSelectionSprite[2] = new CSprite(sheetImage, 199, 853, 145, 224, 620, 300);
+	playersSelectionSprite[3] = new CSprite(sheetImage, 366, 853, 145, 224, 920, 300);
+	playersSelectionSprite[4] = new CSprite(sheetImage, 521, 853, 145, 224, 1220, 300);
+	playersSelectionSprite[5] = new CSprite(sheetImage, 690, 853, 145, 224, 1520, 300);
 }
 
 
