@@ -181,7 +181,7 @@
 				buttonIndexCarryOn++;
 			}
 			// messagebox exit button
-			buttonsArray[8] = new Button(spriteMessageBox, EbuttonType.RemoveMessageBox, 0);
+			buttonsArray[8] = new Button(spriteMessageBoxButton, EbuttonType.RemoveMessageBox, 0);
 			
 			// Get the message box data
 			messageBoxTitle = document.getElementById("MessageBoxTitle");
@@ -231,7 +231,7 @@
 						
 						// Get a new random dice number
 						diceNum = Math.floor((Math.random() * 6));
-						amountToMove = diceNum + 1;
+						amountToMove = 1;//diceNum + 1;
 					}
 				}
 				else if (curTurnPhase == ETurnPhase.MOVING)
