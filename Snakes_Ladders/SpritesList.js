@@ -46,7 +46,7 @@ function LoadMenuSprites()
 	sheetImage.src = "res/SpriteSheet.png";
 	
 	// Load the main menu title
-	title = new CSprite(sheetImage, 0, 0, 0, 0, 0, 0);
+	title = new CSprite(sheetImage, 627, 1110, 836, 583, 100, 30);
 	
 	// Play button for main menu
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);

@@ -253,7 +253,8 @@ function CBoardRoadSafety(board)
 {
 	this.mBoard = board;
 	this.mBoardArray = new Array(100);
-	this.mDimentions = 71;
+	this.mDimentionX = 72;
+	this.mDimentionY = 71.5;
 	this.mTileIncrementX = 0;
 	this.mTileIncrementY = 0;
 	this.mReversingBoard = false;
@@ -285,11 +286,11 @@ function CBoardRoadSafety(board)
 			}
 				
 			// used to get the top left of the tiles incrementally 
-			var tileMonitarX = parseInt(this.mTileIncrementX) * parseInt(this.mDimentions);
-			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentions);
+			var tileMonitarX = parseInt(this.mTileIncrementX) * parseInt(this.mDimentionX);
+			var tileMonitarY = parseInt(this.mTileIncrementY) * parseInt(this.mDimentionY);
 			
 			// create a tile on the board and insert it into an array (positions are realtive to the board sprite)
-			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 116 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 760 - parseInt(tileMonitarY));
+			this.mBoardArray[i] = new CBoardTile(parseInt(this.mBoard.mDrawPosX) + 114 + parseInt(tileMonitarX), parseInt(this.mBoard.mDrawPosY) + 767 - parseInt(tileMonitarY));
 			
 			// if the row on is not a reversed row then increment from left to right
 			if(this.mReversingBoard == false)
