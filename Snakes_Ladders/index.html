@@ -15,45 +15,43 @@
 		<script src="Utilities.js"></script>
 
 		<style>
-		body
-		{ 
-			margin:10px;
-		}
-		
-		#my_canvas
-		{ 
-			box-shadow: 0px 0px 0px 6px #ff0000;
-			border: 8px solid #f;
-			margin: 0 auto;			
-		}
-		
-		#message
-		{
-			position: absolute;
-			left: 775px;
-			top: 250px;
-			padding: 0px, 20px, 10px, 10px;
-			font-family: Calibri, sans-serif;
-			border: solid rgba(0, 0, 0, 0.6);
-		}
-		
-		#message h1
-		{
-			font-weight: bold;
-			font-size: 32px;
-		}
-		
-		#message p
-		{
+			body
+			{ 
+				margin:10px;
+			}
 			
-		}
+			#my_canvas
+			{ 
+				box-shadow: 0px 0px 0px 6px #ff0000;
+				border: 8px solid #f;
+				margin: 0 auto;			
+			}
+			
+			#MessageBoxTitle
+			{
+				position: absolute;
+				left: 775px;
+				top: 250px;
+				margin: 10px;
+				font-family: Calibri, sans-serif;
+				font-weight: bold;
+				font-size: 64px;
+				border: solid rgba(0, 0, 0, 0.6);
+			}
+			
+			#Message
+			{
+				position: absolute;
+				border: solid rgba(0, 0, 0, 0.6);
+			}
 		</style>
 	</head>
 	<body>
 		<canvas id="my_canvas">Canvas not supported in your browser.</canvas>
 		
-		<div id = 'message'>
-			<h1 id = 'MessageBoxTitle', class='title'></h1>
+		<div>
+			<h1 id = "MessageBoxTitle"></h1>
+			<p id = "Message"></p>
 		</div>
 		
 		<script>
@@ -88,7 +86,7 @@
 		curState,
 		EStates =
 		{
-			SPLASH: 0, GAME: 1, MESSAGE: 2, WINNER: 3
+			SPLASH: 0, GAME: 1, WINNER: 2
 		},
 		
 		ETurnPhase =
