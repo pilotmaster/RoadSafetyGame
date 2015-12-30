@@ -54,8 +54,11 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 		{   
 			if (this.mButtonType == EbuttonType.StartGame)
 			{
-				// Call the initialise game function
-				InitialiseGame();
+				if(curState == EStates.SPLASH)
+				{
+					// Call the initialise game function
+					InitialiseGame();
+				}
 			}
 			   
 			if (this.mButtonType == EbuttonType.RollDice)
@@ -81,15 +84,16 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.RemoveMessageBox)
 			{
-					if(curState == EStates.READ_MESSAGE)
+				// Determine the state of the game
+					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
+						messageBoxMessage.textContent = "";
+						messageBoxTitle.style.borderWidth = "0px";
 							
 						// Any key press will close the message box - simply make the state to be moving
-						curTurnPhase = ETurnPhase.MOVING;
-						
-						alert("ss");
+						curTurnPhase = ETurnPhase.MOVING;					
 					}
 							
 			}
