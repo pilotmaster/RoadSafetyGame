@@ -10,11 +10,13 @@ rollDiceButton,
 spriteDice = new Array(6),
 spritePieces = new Array(10),
 spriteMessageBox,
+spriteMessageBoxButton,
 
 //** MAIN MENU DATA **//
 title,
 playButton,
 playersSelectionSprite = new Array(6);
+
 
 // Declare the Sprite class
 function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
@@ -53,6 +55,10 @@ function LoadMenuSprites()
 	
 	// Button Image
 	rollDiceButton = new CSprite(sheetImage, 47, 1111, 221, 214, 4, 4);
+	
+	// MessageBoxButton Sprite
+	spriteMessageBoxButton = new CSprite(sheetImage,47, 1111, 221, 214, 1300, 650 )
+	
 	
 	for(var i = 0; i < 6; i++)
 	{
