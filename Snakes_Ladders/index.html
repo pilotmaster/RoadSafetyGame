@@ -330,7 +330,7 @@
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				
 				// Only draw the dice button when in the waiting phase
-				if (curTurnPhase == ETurnPhase.WAITING)
+				if (curTurnPhase != ETurnPhase.ROLLING_DICE)
 				{
 					rollDiceButton.Draw(context, rollDiceButton.mWidth, rollDiceButton.mHeight);
 				}
