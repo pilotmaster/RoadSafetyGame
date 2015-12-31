@@ -71,7 +71,7 @@ function LoadMenuSprites()
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
 	
 	// Button Image
-	rollDiceButton = new CSprite(sheetImage, 5, 464, 300, 287, 4, 4);
+	rollDiceButton = new CSprite(sheetImage, 0, 464, 305, 287, 4, 4);
 	
 	// MessageBoxButton Sprite
 	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 277, 266, 1160, 630);
