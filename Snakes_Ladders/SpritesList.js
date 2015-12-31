@@ -65,7 +65,7 @@ function LoadMenuSprites()
 	sheetImage.src = "res/SpriteSheet.png";
 	
 	// Load the main menu title
-	title = new CSprite(sheetImage, 627, 1110, 836, 583, 100, 30);
+	title = new CSprite(sheetImage, 627, 1110, 836, 583, 500, 30);
 	
 	// Play button for main menu
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
@@ -77,12 +77,12 @@ function LoadMenuSprites()
 	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 277, 266, 1160, 630);
 	
 	// Player selection sprites
-	playersSelectionSprite[0] = new CSprite(sheetImage, 1382, 853, 145, 224, 20, 300);
-	playersSelectionSprite[1] = new CSprite(sheetImage, 42, 853, 145, 224, 320, 300);
-	playersSelectionSprite[2] = new CSprite(sheetImage, 199, 853, 145, 224, 620, 300);
-	playersSelectionSprite[3] = new CSprite(sheetImage, 366, 853, 145, 224, 920, 300);
-	playersSelectionSprite[4] = new CSprite(sheetImage, 521, 853, 145, 224, 1220, 300);
-	playersSelectionSprite[5] = new CSprite(sheetImage, 690, 853, 145, 224, 1520, 300);
+	playersSelectionSprite[0] = new CSprite(sheetImage, 1382, 853, 145, 224, 90, 340);
+	playersSelectionSprite[1] = new CSprite(sheetImage, 42, 853, 145, 224, 390, 340);
+	playersSelectionSprite[2] = new CSprite(sheetImage, 199, 853, 145, 224, 690, 340);
+	playersSelectionSprite[3] = new CSprite(sheetImage, 366, 853, 145, 224, 990, 340);
+	playersSelectionSprite[4] = new CSprite(sheetImage, 521, 853, 145, 224, 1290, 340);
+	playersSelectionSprite[5] = new CSprite(sheetImage, 690, 853, 145, 224, 1590, 340);
 }
 
 
