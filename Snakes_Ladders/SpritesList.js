@@ -9,6 +9,7 @@ rollDiceButton,
 // array of the different dice images
 spriteDice = new Array(6),
 spritePieces = new Array(10),
+spriteGlows = new Array(10),
 spriteMessageBox,
 spriteMessageBoxButton,
 
@@ -36,6 +37,24 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 		// Draw the sprite at the provided location using the saved data
 		context.drawImage(this.mImage, this.mPosX, this.mPosY, this.mWidth, this.mHeight, this.mDrawPosX, this.mDrawPosY, this.mWidth, this.mHeight);
 	}
+	
+	this.SetDrawPositionWithOffset = function(drawPosX, drawPosY)
+	{
+		this.mDrawPosX = drawPosX - (this.mWidth / 2);
+		this.mDrawPosY = drawPosY - (this.mHeight / 2);
+	}
+	
+	this.CenterDrawPosX = function()
+	{
+		var val = parseInt(this.mDrawPosX) + parseInt((this.mWidth / 2));
+		return val;
+	}
+	
+	this.CenterDrawPosY = function()
+	{
+		var val = parseInt(this.mDrawPosY) + parseInt((this.mHeight / 2));
+		return val;
+	}
 }
 
 // Function to load the initial main menu sprites
@@ -52,10 +71,10 @@ function LoadMenuSprites()
 	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
 	
 	// Button Image
-	rollDiceButton = new CSprite(sheetImage, 47, 1111, 221, 214, 4, 4);
+	rollDiceButton = new CSprite(sheetImage, 5, 464, 300, 287, 4, 4);
 	
 	// MessageBoxButton Sprite
-	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 221, 214, 1160, 630);
+	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 277, 266, 1160, 630);
 	
 	// Player selection sprites
 	playersSelectionSprite[0] = new CSprite(sheetImage, 1382, 853, 145, 224, 20, 300);
@@ -93,6 +112,13 @@ function LoadSprites(board)
 	spriteDice[3] = new CSprite(sheetImage, 235, 13, 221, 214, 5, 5);
 	spriteDice[4] = new CSprite(sheetImage, 8, 13, 221, 214, 5, 5);
 	
+	// Set the dice position along with button
+	for (i = 0; i < 6; i++)
+	{
+		spriteDice[i].SetDrawPositionWithOffset(150, 150);
+	}
+	rollDiceButton.SetDrawPositionWithOffset(150, 150);
+	
 	// Player sprites
 	spritePieces[0] = new CSprite(sheetImage, 708, 16, 69, 54, 5, 300);
 	spritePieces[1] = new CSprite(sheetImage, 795, 16, 69, 54, 5, 380);
@@ -104,6 +130,25 @@ function LoadSprites(board)
 	spritePieces[7] = new CSprite(sheetImage, 882, 73, 69, 54, 5, 840);
 	spritePieces[8] = new CSprite(sheetImage, 969, 73, 69, 54, 5, 920);
 	spritePieces[9] = new CSprite(sheetImage, 1056, 73, 69, 54, 5, 1000);
+	
+	// Player glows
+	spriteGlows[0] = new CSprite(sheetImage, 1131, 1, 82, 68, 5, 300);
+	spriteGlows[1] = new CSprite(sheetImage, 1210, 1, 82, 68, 5, 300);
+	spriteGlows[2] = new CSprite(sheetImage, 1292, 1, 82, 68, 5, 300);
+	spriteGlows[3] = new CSprite(sheetImage, 1376, 1, 82, 68, 5, 300);
+	spriteGlows[4] = new CSprite(sheetImage, 1460, 1, 82, 68, 5, 300);
+	spriteGlows[5] = new CSprite(sheetImage, 1131, 72, 82, 68, 5, 300);
+	spriteGlows[6] = new CSprite(sheetImage, 1210, 72, 82, 68, 5, 300);
+	spriteGlows[7] = new CSprite(sheetImage, 1291, 72, 82, 68, 5, 300);
+	spriteGlows[8] = new CSprite(sheetImage, 1376, 72, 82, 68, 5, 300);
+	spriteGlows[9] = new CSprite(sheetImage, 1462, 72, 82, 68, 5, 300);
+	
+	// Position pieces and glows correctly
+	for (i = 0; i < 10; i++)
+	{
+		spritePieces[i].SetDrawPositionWithOffset(50, 300 + (i * 80));
+		spriteGlows[i].SetDrawPositionWithOffset(50, 300 + (i * 80));
+	}
 	
 	// Message box sprite
 	spriteMessageBox = new CSprite(sheetImage, 805, 188, 985, 645, 400, 200);

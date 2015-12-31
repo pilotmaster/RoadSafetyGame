@@ -350,8 +350,8 @@
 				
 				// Draw the glow and sprite for the current player
 				// Current player drawn last so it appears above all other players
-				playersList[curPlayer].mPiece.DrawGlow();
 				playersList[curPlayer].Render(context);
+				playersList[curPlayer].mPiece.DrawGlow();
 				
 				// Draw the message box on top of everything else if in the correct phase
 				if (curTurnPhase == ETurnPhase.READ_MESSAGE)

@@ -105,77 +105,20 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 
 
 // Piece class - contains a sprite object, and an enum stating which type it is. Also contains a state for whether or not it has already been chosen
-function CPiece(sprite, colour)
+function CPiece(sprite, glow)
 {
 	this.mSprite = sprite;
-	this.mColour = colour;
+	this.mGlow = glow;
 	this.mBeenChosen = false;
 	
 	// Function to draw a glow behind a piece
 	this.DrawGlow = function()
 	{
-		// Save the context before continuing
-		context.save();
+		// Update position of glow
+		this.mGlow.SetDrawPositionWithOffset(this.mSprite.CenterDrawPosX(), this.mSprite.CenterDrawPosY())
 		
-		// Determine the position of the glow
-		var lightX = parseInt(this.mSprite.mDrawPosX) + parseInt((this.mSprite.mWidth / 2));
-		var lightY = parseInt(this.mSprite.mDrawPosY) + parseInt((this.mSprite.mHeight / 2));;
-		
-		// Determine the colour of the glow
-		var rgbColourString;
-		var transparency = 0.75;
-		switch (this.mColour)
-		{
-			case EPieceColours.RED:
-				rgbColourString = "rgba(190, 85, 80, " + transparency + ")";
-				break;
-			case EPieceColours.ORANGE:
-				rgbColourString = "rgba(190, 136, 84, " + transparency + ")";
-				break;
-			case EPieceColours.LILAC:
-				rgbColourString = "rgba(171, 88, 192, " + transparency + ")";
-				break;
-			case EPieceColours.CYAN:
-				rgbColourString = "rgba(92, 192, 161, " + transparency + ")";
-				break;
-			case EPieceColours.PURPLE:
-				rgbColourString = "rgba(145, 89, 192, " + transparency + ")";
-				break;
-			case EPieceColours.BLUE:
-				rgbColourString = "rgba(92, 101, 193, " + transparency + ")";
-				break;
-			case EPieceColours.GREEN:
-				rgbColourString = "rgba(101, 193, 92, " + transparency + ")";
-				break;
-			case EPieceColours.YELLOW:
-				rgbColourString = "rgba(193, 184, 92, " + transparency + ")";
-				break;
-			case EPieceColours.BLACK:
-				rgbColourString = "rgba(84, 86, 86, " + transparency + ")";
-				break;
-			case EPieceColours.WHITE:
-				rgbColourString = "rgba(193, 193, 193, " + transparency + ")";
-				break;
-			default:
-				rgbColourString = "rgba(190, 85, 80, " + transparency + ")";
-				break;
-		}
-		
-		// The size of the gloaw
-		var glowSize = 45;
-		
-		// Create the gradient
-		var glow = context.createRadialGradient(lightX, lightY, glowSize / 1.5, lightX, lightY, glowSize);
-		glow.addColorStop(0, rgbColourString);
-		glow.addColorStop(1, "transparent");
-		
-		// Set the context state for transparent rendering
-		context.globalCompositeOperation = "additive";
-		context.fillStyle = glow;
-		context.fillRect(0, 0, width, height);
-		
-		// Restore the context state
-		context.restore();
+		// Draw the glow
+		this.mGlow.Draw(context, this.mGlow.mWidth, this.mGlow.mHeight);
 	}
 	
 	// Function to render this piece
@@ -358,7 +301,7 @@ function InitialisePieces()
 	// Go through and create each piece object
 	for (i = 0; i < 10; i++)
 	{
-		piecesList[i] = new CPiece(spritePieces[i], i);
+		piecesList[i] = new CPiece(spritePieces[i], spriteGlows[i]);
 	}
 }
 
