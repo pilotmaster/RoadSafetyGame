@@ -246,7 +246,7 @@
 						
 						// Get a new random dice number
 						diceNum = Math.floor((Math.random() * 6));
-						amountToMove = 1;//diceNum + 1;
+						amountToMove = 99;//diceNum + 1;
 					}
 				}
 				else if (curTurnPhase == ETurnPhase.MOVING)
@@ -375,6 +375,18 @@
 					spriteMessageBoxButton.Draw(context, spriteMessageBoxButton.mWidth, spriteMessageBoxButton.mHeight);
 				}
 			}
+			
+			if(curState == EStates.WINNER)
+			{
+				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
+				spriteMessageBox.Draw(context, spriteMessageBox.mWidth, spriteMessageBox.mHeight);
+				spriteMessageBoxButton.Draw(context, spriteMessageBoxButton.mWidth, spriteMessageBoxButton.mHeight);
+				messageBoxTitle.textContent = "WINNER!";
+				
+				var winnerNumber = parseInt(curPlayer) + 1;
+				messageBoxMessage.textContent = "congratulations Player " + winnerNumber + ", You Win!"
+			}
+			
 		}
 		
 		<!-- Start execution by calling the Main function -->

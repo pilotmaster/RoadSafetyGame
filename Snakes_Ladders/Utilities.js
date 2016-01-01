@@ -91,6 +91,7 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 				// Determine the state of the game
 					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
+						alert("enter read message")
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
@@ -99,6 +100,19 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 							
 						// Any key press will close the message box - simply make the state to be moving
 						curTurnPhase = ETurnPhase.MOVING;					
+					}
+					
+					
+					if(curState == EStates.WINNER)
+					{
+						// Set message box title to be nothing
+						messageBoxTitle.textContent = "";
+						messageBoxMessage.textContent = "";
+						messageBoxTitle.style.borderWidth = "0px";
+						messageBoxMessage.style.borderWidth = "0px";
+
+						curState =	EStates.SPLASH;	
+						curTurnPhase = ETurnPhase.WAITING;						
 					}
 							
 			}
@@ -150,7 +164,6 @@ function CPlayer(piece)
 		{
 				curState = EStates.WINNER;
 				amountToMove = 0;
-				alert("Winner Winner Chicken Dinner");
 				return;
 		}
 		
