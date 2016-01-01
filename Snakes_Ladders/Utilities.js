@@ -52,8 +52,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 		if(mouseX > this.mSprite.mDrawPosX && mouseX < maxWidth
 		   && mouseY > this.mSprite.mDrawPosY && mouseY < maxHeight)
 		{   
+			
 			if (this.mButtonType == EbuttonType.StartGame)
 			{
+				MenuClick.play();
 				if(curState == EStates.SPLASH)
 				{
 					// Call the initialise game function
@@ -65,10 +67,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			{
 				// Only execute this part if the game is in the WAITING phase
 				if (curTurnPhase == ETurnPhase.WAITING && curState == EStates.GAME)
-				{
+				{	
+					diceRoll.play();
 					// Set the phase to be rolling the dice
-					curTurnPhase = ETurnPhase.ROLLING_DICE;
-					   
+					curTurnPhase = ETurnPhase.ROLLING_DICE;				   
 					// Determine how many jumps the dice does before settling on a number
 					diceRolls = Math.floor((Math.random() * 15)) + 5;
 				}
@@ -76,6 +78,7 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.PlayerSelection)
 			{
+				MenuClick.play();
 				if (curState == EStates.SPLASH)
 				{
 					numPlayers = this.mPlayersNumber;
@@ -84,6 +87,7 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.RemoveMessageBox)
 			{
+				MenuClick.play();
 				// Determine the state of the game
 					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
@@ -150,6 +154,7 @@ function CPlayer(piece)
 				return;
 		}
 		
+	
 		// Increment the lerp time
 		this.mLerpTime += frameTime * this.mLerpSpeed;
 		

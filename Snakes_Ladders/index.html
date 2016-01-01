@@ -72,6 +72,13 @@
 		<!-- VARIABLES -->
 		var
 
+		<!-- Sound-based data -->
+		diceRoll,
+		Swoosh,
+		MenuClick,
+		Snake,
+		Ladder,
+		
 		<!-- Window-based data -->
 		canvas,
 		context,
@@ -189,6 +196,12 @@
 			messageBoxTitle = document.getElementById("MessageBoxTitle");
 			messageBoxMessage = document.getElementById("Message");
 			
+			diceRoll = new Audio("res/DiceRoll.wav"); // buffers automatically when created
+			Swoosh = new Audio("res/Swoosh.wav");
+			MenuClick = new Audio("res/MenuClick.wav");
+			Snake = new Audio("res/Snake.wav");
+			Ladder = new Audio("res/Ladder.wav");
+			
 			Run();
 		}
 		
@@ -233,7 +246,7 @@
 						
 						// Get a new random dice number
 						diceNum = Math.floor((Math.random() * 6));
-						amountToMove = diceNum + 1;
+						amountToMove = 1;//diceNum + 1;
 					}
 				}
 				else if (curTurnPhase == ETurnPhase.MOVING)
@@ -259,11 +272,13 @@
 						// Set the message title - determine if snake or ladder
 						if (playersList[curPlayer].mPlayerGridPos < curGridTile.mAltDestinationIndex)
 						{
+							Ladder.play();
 							messageBoxTitle.textContent = "Well Done!";
 							messageBoxTitle.style.color = "rgba(79, 181, 69, 1)";
 						}
 						else
 						{
+							Snake.play();
 							messageBoxTitle.textContent = "Oh Dear!";
 							messageBoxTitle.style.color = "rgba(187, 76, 80, 1)";
 						}
