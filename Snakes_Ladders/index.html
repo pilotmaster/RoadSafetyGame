@@ -20,11 +20,11 @@
 				margin:10px;
 			}
 			
-			#my_canvas
+			#GameCanvas
 			{ 
-				box-shadow: 0px 0px 0px 6px #ff0000;
-				border: 8px solid #f;
-				margin: 0 auto;			
+				position: absolute;
+				left: 0%;
+				top: 0%;
 			}
 			
 			#MessageBoxTitle
@@ -59,7 +59,7 @@
 		</style>
 	</head>
 	<body>
-		<canvas id="my_canvas">Canvas not supported in your browser.</canvas>
+		<canvas id="GameCanvas">Canvas not supported in your browser.</canvas>
 		
 		<div>
 			<h1 id = "MessageBoxTitle"></h1>
@@ -120,7 +120,7 @@
 		{
 			curState = EStates.SPLASH;
 			<!-- Create the canvas -->
-			canvas = document.getElementById("my_canvas");
+			canvas = document.getElementById("GameCanvas");
 
 			<!-- Set the canvas width and height, along with the type of border. Update the context and apply changes -->
 			width = window.innerWidth;
