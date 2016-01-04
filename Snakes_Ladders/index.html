@@ -33,7 +33,7 @@
 				left: 450px;
 				top: 210px;
 				width: 848px;
-				height: 100px;
+				height: auto; <!-- 100 px -->
 				font-family: Calibri, sans-serif;
 				font-weight: bold;
 				font-size: 64px;
@@ -49,12 +49,12 @@
 				border: solid rgba(175, 110, 45, 1);
 				border-style: dotted solid solid solid;
 				border-width: 0px;
+				font-size: 54px;
+				text-align: center;
 				left: 450px;
 				top: 350px;
 				width: 848px;
-				height: 200px;
-				font-size: 54px;
-				text-align: center;
+				height: auto; <!-- 200 px -->
 			}
 		</style>
 	</head>
@@ -381,12 +381,11 @@
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				spriteMessageBox.Draw(context, spriteMessageBox.mWidth, spriteMessageBox.mHeight);
 				spriteMessageBoxButton.Draw(context, spriteMessageBoxButton.mWidth, spriteMessageBoxButton.mHeight);
-				messageBoxTitle.textContent = "WINNER!";
+				messageBoxTitle.textContent = "Winner!";
 				
 				var winnerNumber = parseInt(curPlayer) + 1;
-				messageBoxMessage.textContent = "congratulations Player " + winnerNumber + ", You Win!"
+				messageBoxMessage.textContent = "Congratulations Player " + winnerNumber + ", you win!"
 			}
-			
 		}
 		
 		<!-- Start execution by calling the Main function -->
