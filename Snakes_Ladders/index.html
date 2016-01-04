@@ -20,11 +20,17 @@
 				margin:10px;
 			}
 			
-			#GameCanvas
+			#GameArea
 			{ 
 				position: absolute;
-				left: 0%;
-				top: 0%;
+				left; 50%;
+				top: 50%;
+			}
+			
+			#GameCanvas
+			{ 
+				width: 100%;
+				height: 100%;
 			}
 			
 			#MessageBoxTitle
@@ -33,7 +39,7 @@
 				left: 450px;
 				top: 210px;
 				width: 848px;
-				height: auto; <!-- 100 px -->
+				height: auto;
 				font-family: Calibri, sans-serif;
 				font-weight: bold;
 				font-size: 64px;
@@ -54,12 +60,14 @@
 				left: 450px;
 				top: 350px;
 				width: 848px;
-				height: auto; <!-- 200 px -->
+				height: auto;
 			}
 		</style>
 	</head>
 	<body>
-		<canvas id="GameCanvas">Canvas not supported in your browser.</canvas>
+		<div id="GameArea">
+			<canvas id="GameCanvas">Canvas not supported in your browser.</canvas>
+		</div>
 		
 		<div>
 			<h1 id = "MessageBoxTitle"></h1>
@@ -153,29 +161,9 @@
 				}
 			}, false);
 			
-			// Event listener for a key press
-			document.onkeypress = function(event)
-			{
-				// Determine what button was pressed
-				pressedKey = String.fromCharCode(event.keyCode || event.charCode);
-				
-				// Determine the state of the game
-				if (curState == EStates.GAME)
-				{
-					// Determine the phase of the current turn
-					if (curTurnPhase == ETurnPhase.READ_MESSAGE)
-					{
-						// Set message box title to be nothing
-						messageBoxTitle.textContent = "";
-						messageBoxMessage.textContent = "";
-						messageBoxTitle.style.borderWidth = "0px";
-						messageBoxMessage.style.borderWidth = "0px";
-						
-					    //Any key press will close the message box - simply make the state to be moving
-						curTurnPhase = ETurnPhase.MOVING;
-					}
-				}
-			};
+			// Add event listeners for screen resizes or orientation changes on mobiles
+			window.addEventListener('resize', ResizeGame, false);
+			window.addEventListener('orientationchange', ResizeGame, false);
 			
 			// roll dice button
 			buttonsArray[0] = new Button(rollDiceButton, EbuttonType.RollDice, 0);
@@ -392,6 +380,12 @@
 				messageBoxTitle.style.borderWidth = "5px";
 				messageBoxMessage.style.borderWidth = "5px";
 			}
+		}
+		
+		function ResizeGame()
+		{
+			// Get the game area canvas
+			var gameCanvas = document.getElementById("GameCanvas");
 		}
 		
 		<!-- Start execution by calling the Main function -->

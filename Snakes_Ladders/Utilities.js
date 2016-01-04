@@ -159,8 +159,6 @@ function CPlayer(piece)
 	// Move function for the player object
 	this.Move = function()
 	{
-		alert(this.mPlayerGridPos);
-		
 		// Increment the lerp time
 		this.mLerpTime += frameTime * this.mLerpSpeed;
 		
