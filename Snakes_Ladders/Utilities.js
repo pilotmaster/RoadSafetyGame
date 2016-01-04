@@ -77,10 +77,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			}
 			
 			if (this.mButtonType == EbuttonType.PlayerSelection)
-			{
-				MenuClick.play();
+			{			
 				if (curState == EStates.SPLASH)
 				{
+					MenuClick.play();
 					numPlayers = this.mPlayersNumber;
 				}			
 			}
@@ -159,14 +159,8 @@ function CPlayer(piece)
 	// Move function for the player object
 	this.Move = function()
 	{
-		if(this.mPlayerGridPos == 99)
-		{
-				curState = EStates.WINNER;
-				amountToMove = 0;
-				return;
-		}
+		alert(this.mPlayerGridPos);
 		
-	
 		// Increment the lerp time
 		this.mLerpTime += frameTime * this.mLerpSpeed;
 		
@@ -182,6 +176,13 @@ function CPlayer(piece)
 			this.mTargetPos++;
 			this.mLerpTime = 0;			
 		}	
+		
+		if(this.mPlayerGridPos == 99)
+		{
+				curState = EStates.WINNER;
+				amountToMove = 0;
+				return;
+		}
 	}
 	
 	// Function to render this player
