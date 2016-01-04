@@ -303,12 +303,13 @@ function InitialiseGame()
 	
 	// Initialise the players
 	playersList = new Array(numPlayers);
-	playersList[0] = new CPlayer(piecesList[0]);
-	playersList[1] = new CPlayer(piecesList[1]);
-	playersList[2] = new CPlayer(piecesList[2]);
-	playersList[3] = new CPlayer(piecesList[3]);
-	playersList[4] = new CPlayer(piecesList[4]);
-	playersList[5] = new CPlayer(piecesList[5]);
+	for (i = 0; i < numPlayers; i++)
+	{
+		playersList[i] = new CPlayer(piecesList[i]);
+	}
+	
+	// Set the current player
+	curPlayer = 0;
 }
 
 

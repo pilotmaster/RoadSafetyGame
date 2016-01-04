@@ -378,13 +378,19 @@
 			
 			if(curState == EStates.WINNER)
 			{
+				// Draw the sprites for the message box
 				spriteBoard.Draw(context, spriteBoard.mWidth, spriteBoard.mHeight);
 				spriteMessageBox.Draw(context, spriteMessageBox.mWidth, spriteMessageBox.mHeight);
 				spriteMessageBoxButton.Draw(context, spriteMessageBoxButton.mWidth, spriteMessageBoxButton.mHeight);
-				messageBoxTitle.textContent = "Winner!";
 				
+				// Enter the data for the message box
+				messageBoxTitle.textContent = "Winner!";
 				var winnerNumber = parseInt(curPlayer) + 1;
 				messageBoxMessage.textContent = "Congratulations Player " + winnerNumber + ", you win!"
+				
+				// Set the width of the border to be 5px
+				messageBoxTitle.style.borderWidth = "5px";
+				messageBoxMessage.style.borderWidth = "5px";
 			}
 		}
 		
