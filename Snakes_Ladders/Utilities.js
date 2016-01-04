@@ -91,7 +91,6 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 				// Determine the state of the game
 					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
-						alert("enter read message")
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
