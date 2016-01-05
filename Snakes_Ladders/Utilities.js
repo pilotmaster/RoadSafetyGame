@@ -43,16 +43,16 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 	// Function to handle what occurs when this button is clicked
 	this.BeenClicked = function()
 	{
-		var width = this.mSprite.mWidth;
-		var height = this.mSprite.mHeight;
+		var posX = this.mSprite.mDrawPosX * scale;
+		var posY = this.mSprite.mDrawPosY * scale;
+		var width = this.mSprite.mWidth * scale;
+		var height = this.mSprite.mHeight * scale;
 		
-		var maxWidth = parseInt(this.mSprite.mDrawPosX) + parseInt(width);
-		var maxHeight = parseInt(this.mSprite.mDrawPosY) + parseInt(height);
+		var maxWidth = parseInt(posX) + parseInt(width);
+		var maxHeight = parseInt(posY) + parseInt(height);
 		
-		if(mouseX > this.mSprite.mDrawPosX && mouseX < maxWidth
-		   && mouseY > this.mSprite.mDrawPosY && mouseY < maxHeight)
+		if(mouseX > posX && mouseX < maxWidth && mouseY > posY && mouseY < maxHeight)
 		{   
-			
 			if (this.mButtonType == EbuttonType.StartGame)
 			{
 				MenuClick.play();
