@@ -35,7 +35,7 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 	this.Draw = function(context)
 	{
 		// Draw the sprite at the provided location using the saved data
-		context.drawImage(this.mImage, this.mPosX, this.mPosY, this.mWidth, this.mHeight, this.mDrawPosX, this.mDrawPosY, this.mWidth, this.mHeight);
+		context.drawImage(this.mImage, this.mPosX, this.mPosY, this.mWidth, this.mHeight, this.mDrawPosX * scale, this.mDrawPosY * scale, this.mWidth * scale, this.mHeight * scale);
 	}
 	
 	this.SetDrawPositionWithOffset = function(drawPosX, drawPosY)

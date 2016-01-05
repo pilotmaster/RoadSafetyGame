@@ -17,14 +17,14 @@
 		<style>
 			body
 			{ 
-				margin:10px;
+				margin:0px;
 			}
 			
 			#GameArea
 			{ 
 				position: absolute;
-				left; 50%;
-				top: 50%;
+				left; 0%;
+				top: 0%;
 			}
 			
 			#GameCanvas
@@ -88,12 +88,12 @@
 		Ladder,
 		
 		<!-- Window-based data -->
-		canvas,
 		context,
-		width,
-		height,
+		gameArea,
+		gameCanvas,
 		elemLeft,
 		elemTop,
+		scale,
 		
 		<!-- Run-time game data -->
 		frames = 0,
@@ -127,30 +127,22 @@
 		function Main()
 		{
 			curState = EStates.SPLASH;
-			<!-- Create the canvas -->
-			canvas = document.getElementById("GameCanvas");
+			<!-- Get the canvas -->
+			gameArea = document.getElementById("GameArea");
+			gameCanvas = document.getElementById("GameCanvas");
 
 			<!-- Set the canvas width and height, along with the type of border. Update the context and apply changes -->
-			width = window.innerWidth;
-			height = window.innerHeight;
-			canvas.width = width;
-			canvas.height = height;
-			context = canvas.getContext("2d");
+			ResizeGame();
+			context = gameCanvas.getContext("2d");
 			
 			// Set the background colour
-			context.fillStyle = "#000000";
-			
-			// Event handler
-			elemLeft = canvas.offsetLeft;
-			elemTop  = canvas.offsetTop;
-			
-			document.body.appendChild(canvas);
+			context.fillStyle = "#FFFFFF";
 			
 			// Load the main menu sprites
 			LoadMenuSprites();
 			
 			// Event Listener for mouse clicks
-			canvas.addEventListener("click", function() 
+			window.addEventListener("click", function() 
 			{
 				mouseX = event.pageX - elemLeft;
 				mouseY = event.pageY - elemTop;
@@ -200,9 +192,9 @@
 			{
 				Update();
 				Render();
-				window.requestAnimationFrame(loop, canvas);
+				window.requestAnimationFrame(loop, gameCanvas);
 			}
-			window.requestAnimationFrame(loop, canvas);
+			window.requestAnimationFrame(loop, gameCanvas);
 		}
 		
 		function Update()
@@ -272,8 +264,8 @@
 						}
 						
 						// Set the width of the border to be 5px
-						messageBoxTitle.style.borderWidth = "5px";
-						messageBoxMessage.style.borderWidth = "5px";
+						messageBoxTitle.style.borderWidth = (5 * scale) + "px";
+						messageBoxMessage.style.borderWidth = (5 * scale) + "px";
 						
 						// Set the message to display
 						messageBoxMessage.textContent = curGridTile.mMessage;
@@ -311,7 +303,7 @@
 		function Render()
 		{
 			// Render the background again
-			context.fillRect(0, 0, width, height);
+			context.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 			
 			// if the game is in the menu state
 			if(curState == EStates.SPLASH)
@@ -377,15 +369,56 @@
 				messageBoxMessage.textContent = "Congratulations Player " + winnerNumber + ", you win!"
 				
 				// Set the width of the border to be 5px
-				messageBoxTitle.style.borderWidth = "5px";
-				messageBoxMessage.style.borderWidth = "5px";
+				messageBoxTitle.style.borderWidth = (5 * scale) + "px";
+				messageBoxMessage.style.borderWidth = (5 * scale) + "px";
 			}
 		}
 		
 		function ResizeGame()
 		{
-			// Get the game area canvas
-			var gameCanvas = document.getElementById("GameCanvas");
+			// State the desired aspect ratio (the wanted width / the wanted height)
+			var desiredHeight = 989;
+			var desiredWidth = 1920;
+			var desiredAspectRatio = desiredWidth / desiredHeight;
+			
+			// Determine the new dimensions of the window & the new aspect ratio
+			var newWidth = window.innerWidth;
+			var newHeight = window.innerHeight;
+			var newAspectRatio = newWidth / newHeight;
+			
+			// Determine whether the new aspect ratio has gone out of sync and correct it
+			if (newAspectRatio > desiredAspectRatio)
+			{
+				newWidth = newHeight * desiredAspectRatio;
+				gameArea.style.height = newHeight + 'px';
+				gameArea.style.width = newWidth + 'px';
+			}
+			else
+			{
+				newHeight = newWidth / desiredAspectRatio;
+				gameArea.style.width = newWidth + 'px';
+				gameArea.style.height = newHeight + 'px';
+			}
+			
+			// Move the window to the top left - allows for the window to be centralised later if we want
+			gameArea.style.marginTop = 0 + 'px';
+			gameArea.style.marginLeft = 0 + 'px';
+			
+			// Apply the changes the canvas as well
+			gameCanvas.width = newWidth;
+			gameCanvas.height = newHeight;
+			
+			// Determine the new global scale
+			var originalSize = desiredHeight + desiredWidth;
+			var newSize = newWidth + newHeight;
+			scale = newSize / originalSize;
+			
+			// Update distance from the side which the canvas starts
+			elemLeft = gameCanvas.offsetLeft;
+			elemTop  = gameCanvas.offsetTop;
+			
+			// Append changes
+			document.body.appendChild(gameCanvas);
 		}
 		
 		<!-- Start execution by calling the Main function -->
