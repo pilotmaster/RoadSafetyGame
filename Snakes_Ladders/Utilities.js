@@ -54,10 +54,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 		if(mouseX > posX && mouseX < maxWidth && mouseY > posY && mouseY < maxHeight)
 		{   
 			if (this.mButtonType == EbuttonType.StartGame)
-			{
-				MenuClick.play();
+			{			
 				if(curState == EStates.SPLASH)
 				{
+					MenuClick.play();
 					// Call the initialise game function
 					InitialiseGame();
 				}
@@ -87,10 +87,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			
 			if (this.mButtonType == EbuttonType.RemoveMessageBox)
 			{
-				MenuClick.play();
 				// Determine the state of the game
 					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
+						MenuClick.play();
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
