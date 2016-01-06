@@ -10,6 +10,7 @@ rollDiceButton,
 spriteDice = new Array(6),
 spritePieces = new Array(10),
 spriteGlows = new Array(10),
+spriteNumPlayersGlow,
 spriteMessageBox,
 spriteMessageBoxButton,
 
@@ -83,6 +84,9 @@ function LoadMenuSprites()
 	playersSelectionSprite[3] = new CSprite(sheetImage, 366, 853, 145, 224, 990, 340);
 	playersSelectionSprite[4] = new CSprite(sheetImage, 521, 853, 145, 224, 1290, 340);
 	playersSelectionSprite[5] = new CSprite(sheetImage, 690, 853, 145, 224, 1590, 340);
+	
+	// Player selection glow sprite
+	spriteNumPlayersGlow = new CSprite(sheetImage, 481, 460, 219, 300, 0, 0);
 }
 
 

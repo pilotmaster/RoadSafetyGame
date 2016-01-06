@@ -98,7 +98,7 @@
 		<!-- Run-time game data -->
 		frames = 0,
 		curPlayer = 0,
-		numPlayers = 1,
+		numPlayers = 2,
 		playersList,
 		buttonsAmount = 9,
 		buttonsArray = new Array(buttonsAmount),
@@ -207,6 +207,13 @@
 			// Increment the number of frames passed
 			frames++;
 			
+			// If the current state is main menu, update the position of the current player amount glow
+			if (curState == EStates.SPLASH)
+			{
+				var tmpSprite = playersSelectionSprite[numPlayers - 1];
+				spriteNumPlayersGlow.SetDrawPositionWithOffset(tmpSprite.CenterDrawPosX(), tmpSprite.CenterDrawPosY());
+			}
+			
 			// Validate the current game state
 			if (curState == EStates.GAME)
 			{
@@ -308,9 +315,14 @@
 			// if the game is in the menu state
 			if(curState == EStates.SPLASH)
 			{
+				// Draw the current player selection glow
+				spriteNumPlayersGlow.Draw(context);
+				
+				// Draw the title and the play button
 				title.Draw(context);
 				playButton.Draw(context);
 				
+				// Draw the player button options
 				for(var i = 0; i < 6; i++)
 				{
 					playersSelectionSprite[i].Draw(context);
