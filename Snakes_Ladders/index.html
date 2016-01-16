@@ -100,7 +100,7 @@
 		curPlayer = 0,
 		numPlayers = 2,
 		playersList,
-		buttonsAmount = 9,
+		buttonsAmount = 10,
 		buttonsArray = new Array(buttonsAmount),
 		
 		frameTime,
@@ -109,6 +109,8 @@
 		
 		messageBoxTitle,
 		messageBoxMessage,
+		
+		muted = false,
 
 		<!-- Game state data -->
 		curState,
@@ -140,7 +142,7 @@
 			context = gameCanvas.getContext("2d");
 			
 			// Set the background colour
-			context.fillStyle = "#FFFFFF";
+			context.fillStyle = "#000000";
 			
 			// Load the main menu sprites
 			LoadMenuSprites();
@@ -175,6 +177,9 @@
 			}
 			// messagebox exit button
 			buttonsArray[8] = new Button(spriteMessageBoxButton, EbuttonType.RemoveMessageBox, 0);
+			
+			// Mute and unmute buttons
+			buttonsArray[9] = new Button(spriteMute, EbuttonType.ToggleMute, 0);
 			
 			diceRoll = new Audio("res/DiceRoll.wav"); // buffers automatically when created
 			Swoosh = new Audio("res/Swoosh.wav");
@@ -259,13 +264,19 @@
 						// Set the message title - determine if snake or ladder
 						if (playersList[curPlayer].mPlayerGridPos < curGridTile.mAltDestinationIndex)
 						{
-							Ladder.play();
+							if (!muted)
+							{
+								Ladder.play();
+							}
 							messageBoxTitle.textContent = "Well Done!";
 							messageBoxTitle.style.color = "rgba(79, 181, 69, 1)";
 						}
 						else
 						{
-							Snake.play();
+							if (!muted)
+							{
+								Snake.play();
+							}
 							messageBoxTitle.textContent = "Oh Dear!";
 							messageBoxTitle.style.color = "rgba(187, 76, 80, 1)";
 						}
@@ -383,6 +394,16 @@
 				// Set the width of the border to be 5px
 				messageBoxTitle.style.borderWidth = (5 * scale) + "px";
 				messageBoxMessage.style.borderWidth = (5 * scale) + "px";
+			}
+			
+			// Draw the mute/unmute button
+			if (muted)
+			{
+				spriteUnmute.Draw(context);
+			}
+			else
+			{
+				spriteMute.Draw(context);
 			}
 		}
 		

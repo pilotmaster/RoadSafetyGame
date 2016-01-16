@@ -14,6 +14,9 @@ spriteNumPlayersGlow,
 spriteMessageBox,
 spriteMessageBoxButton,
 
+spriteMute,
+spriteUnMute,
+
 //** MAIN MENU DATA **//
 title,
 playButton,
@@ -87,6 +90,10 @@ function LoadMenuSprites()
 	
 	// Player selection glow sprite
 	spriteNumPlayersGlow = new CSprite(sheetImage, 481, 460, 219, 300, 0, 0);
+	
+	// Load in the mute and unmute sprites
+	spriteMute = new CSprite(sheetImage, 51, 1148, 141, 139, 1400, 5);
+	spriteUnmute = new CSprite(sheetImage, 51, 1321, 141, 139, 1400, 5);
 }
 
 

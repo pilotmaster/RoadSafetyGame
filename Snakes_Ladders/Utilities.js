@@ -20,7 +20,7 @@ boardArray,
 // Enumeration of button types
 EbuttonType =
 {
-	RollDice: 0, StartGame: 2, PlayerSelection: 3, RemoveMessageBox: 4
+	RollDice: 0, StartGame: 2, PlayerSelection: 3, RemoveMessageBox: 4, ToggleMute: 5
 };
 
 // Enumeration of all the colours of the pieces
@@ -57,9 +57,25 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			{			
 				if(curState == EStates.SPLASH)
 				{
-					MenuClick.play();
+					if (!muted)
+					{
+						MenuClick.play();
+					}
 					// Call the initialise game function
 					InitialiseGame();
+				}
+			}
+			
+			if (this.mButtonType == EbuttonType.ToggleMute)
+			{
+				// If it's muted, unmute and vice versa
+				if (muted)
+				{
+					muted = false;
+				}
+				else
+				{
+					muted = true;
 				}
 			}
 			   
@@ -68,7 +84,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 				// Only execute this part if the game is in the WAITING phase
 				if (curTurnPhase == ETurnPhase.WAITING && curState == EStates.GAME)
 				{	
-					diceRoll.play();
+					if (!muted)
+					{
+						diceRoll.play();
+					}
 					// Set the phase to be rolling the dice
 					curTurnPhase = ETurnPhase.ROLLING_DICE;				   
 					// Determine how many jumps the dice does before settling on a number
@@ -80,7 +99,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 			{			
 				if (curState == EStates.SPLASH)
 				{
-					MenuClick.play();
+					if (!muted)
+					{
+						MenuClick.play();
+					}
 					numPlayers = this.mPlayersNumber;
 				}			
 			}
@@ -90,7 +112,10 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 				// Determine the state of the game
 					if(curTurnPhase == ETurnPhase.READ_MESSAGE)
 					{
-						MenuClick.play();
+						if (!muted)
+						{
+							MenuClick.play();
+						}
 						// Set message box title to be nothing
 						messageBoxTitle.textContent = "";
 						messageBoxMessage.textContent = "";
