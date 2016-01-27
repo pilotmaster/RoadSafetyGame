@@ -20,7 +20,7 @@ boardArray,
 // Enumeration of button types
 EbuttonType =
 {
-	RollDice: 0, StartGame: 2, PlayerSelection: 3, RemoveMessageBox: 4, ToggleMute: 5
+	RollDice: 0, StartGame: 2, PlayerSelection: 3, BoardSelection: 4, RemoveMessageBox: 5, ToggleMute: 6
 };
 
 // Enumeration of all the colours of the pieces
@@ -32,13 +32,14 @@ var EPieceColours =
 
 
 // Button class - handles the interaction of button objects
-function Button(sprite, buttonType, selectedPlayerNumber)
+function Button(sprite, buttonType, selectedPlayerNumber, selectedBoardNumber)
 {
 	// Type of button
 	this.mButtonType = buttonType;
 	// The sprite that will be used for the button
 	this.mSprite = sprite;
 	this.mPlayersNumber = selectedPlayerNumber;
+	this.mBoardNumber = selectedBoardNumber;
 	
 	// Function to handle what occurs when this button is clicked
 	this.BeenClicked = function()
@@ -105,6 +106,19 @@ function Button(sprite, buttonType, selectedPlayerNumber)
 					}
 					numPlayers = this.mPlayersNumber;
 				}			
+			}
+			
+			if (this.mButtonType == EbuttonType.BoardSelection)
+			{
+				if (curState == EStates.SPLASH)
+				{
+					if (!muted)
+					{
+						MenuClick.play();
+					}
+					// Set the selected board number
+					currentBoard = this.mBoardNumber;
+				}
 			}
 			
 			if (this.mButtonType == EbuttonType.RemoveMessageBox)
@@ -289,24 +303,48 @@ function CBoardRoadSafety(board)
 		}
 		
 		// Insert whether a tile moves to another tile
-		this.mBoardArray[0].SetAltDestination(21, "You held hands as you walked along");
-		this.mBoardArray[6].SetAltDestination(25, "You kept looking and listening as you crossed the road");
-		this.mBoardArray[8].SetAltDestination(10, "You put your ball in a bag to carry to the park");
-		this.mBoardArray[20].SetAltDestination(15, "You played with a ball on the pavement!");
-		this.mBoardArray[30].SetAltDestination(51, "You crossed the road at the zebra crossing");
-		this.mBoardArray[35].SetAltDestination(2, "You did not look and listen for traffic!");
-		this.mBoardArray[37].SetAltDestination(61, "You kept holding hands as you looked in the shop window");
-		this.mBoardArray[46].SetAltDestination(88, "You waited until you saw the green man showing on the pelican crossing");
-		this.mBoardArray[52].SetAltDestination(29, "You did not hold hands as you crossed the road!");
-		this.mBoardArray[54].SetAltDestination(24, "You nearly crossed the road when the red man was showing on the pelican!");
-		this.mBoardArray[55].SetAltDestination(63, "You hold hands as you crossed the road");
-		this.mBoardArray[57].SetAltDestination(12, "You ran along the pavement near the kerb!");
-		this.mBoardArray[79].SetAltDestination(98, "You rode your bike on the cycle path");
-		this.mBoardArray[82].SetAltDestination(38, "You set off to get your ball when it rolled in the road!");
-		this.mBoardArray[85].SetAltDestination(93, "You kept well away from the kerb when walking");
-		this.mBoardArray[87].SetAltDestination(65, "You started to cross the road when the green man was flashing at the pelican!");
-		this.mBoardArray[90].SetAltDestination(68, "You and your friend pushed each other near the road!");
-		this.mBoardArray[96].SetAltDestination(66, "You started to cross the road before you made sure the traffic had stopped!");
+		if (currentBoard == 0)
+		{
+			this.mBoardArray[0].SetAltDestination(21, "You held hands as you walked along");
+			this.mBoardArray[6].SetAltDestination(25, "You kept looking and listening as you crossed the road");
+			this.mBoardArray[8].SetAltDestination(10, "You put your ball in a bag to carry to the park");
+			this.mBoardArray[20].SetAltDestination(15, "You played with a ball on the pavement!");
+			this.mBoardArray[30].SetAltDestination(51, "You crossed the road at the zebra crossing");
+			this.mBoardArray[35].SetAltDestination(2, "You did not look and listen for traffic!");
+			this.mBoardArray[37].SetAltDestination(61, "You kept holding hands as you looked in the shop window");
+			this.mBoardArray[46].SetAltDestination(88, "You waited until you saw the green man showing on the pelican crossing");
+			this.mBoardArray[52].SetAltDestination(29, "You did not hold hands as you crossed the road!");
+			this.mBoardArray[54].SetAltDestination(24, "You nearly crossed the road when the red man was showing on the pelican!");
+			this.mBoardArray[55].SetAltDestination(63, "You held hands as you crossed the road");
+			this.mBoardArray[57].SetAltDestination(12, "You ran along the pavement near the kerb!");
+			this.mBoardArray[79].SetAltDestination(98, "You rode your bike on the cycle path");
+			this.mBoardArray[82].SetAltDestination(38, "You set off to get your ball when it rolled in the road!");
+			this.mBoardArray[85].SetAltDestination(93, "You kept well away from the kerb when walking");
+			this.mBoardArray[87].SetAltDestination(65, "You started to cross the road when the green man was flashing at the pelican!");
+			this.mBoardArray[90].SetAltDestination(68, "You and your friend pushed each other near the road!");
+			this.mBoardArray[96].SetAltDestination(66, "You started to cross the road before you made sure the traffic had stopped!");
+		}
+		else if (currentBoard == 1)
+		{
+			this.mBoardArray[0].SetAltDestination(21, "You cycled with friends to the park");
+			this.mBoardArray[6].SetAltDestination(25, "You used your pedometer today which showed you walked over 12,000 steps");
+			this.mBoardArray[8].SetAltDestination(10, "You scooted to school instead of getting a lift in your friend's car");
+			this.mBoardArray[20].SetAltDestination(15, "You rode your bike on the footpath and scared an old lady!");
+			this.mBoardArray[30].SetAltDestination(51, "You reduced your carbon footprint by choosing to buy local fruit from the shop instead of fruit that had travelled many miles");
+			this.mBoardArray[35].SetAltDestination(2, "You didn't wear your high visibility vest when walking at night!");
+			this.mBoardArray[37].SetAltDestination(61, "You checked your bike properly before cycling to school");
+			this.mBoardArray[46].SetAltDestination(88, "You suggested to your dad that you park the car away from your friend's house so that you could walk the short distance through their estate");
+			this.mBoardArray[52].SetAltDestination(29, "You chose to watch television rather than go scooting with friends!");
+			this.mBoardArray[54].SetAltDestination(24, "Mum's shopping basket was full of products that had travelled from abroad!");
+			this.mBoardArray[55].SetAltDestination(63, "You took the bus into town rather than the car");
+			this.mBoardArray[57].SetAltDestination(12, "You cycled beside your friend riding on a narrow road so that traffic could not pass you!");
+			this.mBoardArray[79].SetAltDestination(98, "You walked to school today instead of asking for a lift in the car");
+			this.mBoardArray[82].SetAltDestination(38, "You wouldn't car share with your friend but chose to travel sperately!");
+			this.mBoardArray[85].SetAltDestination(93, "Your family chose a local holiday camping instead of travelling abroad ");
+			this.mBoardArray[87].SetAltDestination(65, "You wouldn't wear your cycle helmet so mum stopped you riding your bike!");
+			this.mBoardArray[90].SetAltDestination(68, "You asked your dad to drive you to your friends when you could have easily walked!");
+			this.mBoardArray[96].SetAltDestination(66, "You woke 10 minutes late this morning and missed the Walking Bus!");
+		}
 	}
 }
 
@@ -317,7 +355,7 @@ function InitialiseGame()
 	curState = EStates.GAME;
 			
 	// Load sprites takes either RS or SD depending on which board is being used
-	LoadSprites("RS");
+	LoadSprites(currentBoard);
 	
 	boardArray = new CBoardRoadSafety(spriteBoard);
 	boardArray.mFillArray();

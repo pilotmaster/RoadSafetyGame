@@ -11,6 +11,8 @@ spriteDice = new Array(6),
 spritePieces = new Array(10),
 spriteGlows = new Array(10),
 spriteNumPlayersGlow,
+spriteBoardOptionsGlow,
+spriteBoardOptions = new Array(2),
 spriteMessageBox,
 spriteMessageBoxButton,
 
@@ -61,7 +63,7 @@ function CSprite(image, posX, posY, width, height, drawPosX, drawPosY)
 	}
 }
 
-// Function to load the initial main menu sprites
+// Function to load the initial main menu sprites 918, 176, 88, <<100
 function LoadMenuSprites()
 {
 	// Load the sprite sheet image
@@ -72,7 +74,7 @@ function LoadMenuSprites()
 	title = new CSprite(sheetImage, 627, 1110, 836, 583, 500, 30);
 	
 	// Play button for main menu
-	playButton = new CSprite(sheetImage, 840, 849, 525, 234, 620, 650);
+	playButton = new CSprite(sheetImage, 1205, 904, 317, 143, 709, 750);
 	
 	// Button Image
 	rollDiceButton = new CSprite(sheetImage, 0, 464, 305, 287, 4, 4);
@@ -81,15 +83,20 @@ function LoadMenuSprites()
 	spriteMessageBoxButton = new CSprite(new Image() ,47, 1111, 277, 266, 1160, 630);
 	
 	// Player selection sprites
-	playersSelectionSprite[0] = new CSprite(sheetImage, 1382, 853, 145, 224, 90, 340);
-	playersSelectionSprite[1] = new CSprite(sheetImage, 42, 853, 145, 224, 390, 340);
-	playersSelectionSprite[2] = new CSprite(sheetImage, 199, 853, 145, 224, 690, 340);
-	playersSelectionSprite[3] = new CSprite(sheetImage, 366, 853, 145, 224, 990, 340);
-	playersSelectionSprite[4] = new CSprite(sheetImage, 521, 853, 145, 224, 1290, 340);
-	playersSelectionSprite[5] = new CSprite(sheetImage, 690, 853, 145, 224, 1590, 340);
+	playersSelectionSprite[0] = new CSprite(sheetImage, 1530, 907, 89, 136, 378, 340);
+	playersSelectionSprite[1] = new CSprite(sheetImage, 726, 907, 89, 136, 554, 340);
+	playersSelectionSprite[2] = new CSprite(sheetImage, 820, 907, 89, 136, 730, 340);
+	playersSelectionSprite[3] = new CSprite(sheetImage, 920, 907, 89, 136, 906, 340);
+	playersSelectionSprite[4] = new CSprite(sheetImage, 1015, 907, 89, 136, 1082, 340);
+	playersSelectionSprite[5] = new CSprite(sheetImage, 1115, 907, 89, 136, 1258, 340);
+	
+	// Sprite board options buttons
+	spriteBoardOptions[0] = new CSprite(sheetImage, 1872, 226, 318, 142, 515, 540);
+	spriteBoardOptions[1] = new CSprite(sheetImage, 1872, 61, 318, 142, 892, 540);
+	spriteBoardOptionsGlow = new CSprite(sheetImage, 220, 951, 377, 205, 0, 0);
 	
 	// Player selection glow sprite
-	spriteNumPlayersGlow = new CSprite(sheetImage, 481, 460, 219, 300, 0, 0);
+	spriteNumPlayersGlow = new CSprite(sheetImage, 520, 519, 120, 168, 0, 0);
 	
 	// Load in the mute and unmute sprites
 	spriteMute = new CSprite(sheetImage, 51, 1148, 141, 139, 1400, 5);
@@ -102,11 +109,18 @@ function LoadSprites(board)
 {
 	// There are two boards available: Road Safety and Sustainable Development
 	// Determine which one has been chosen
-	if (board == "RS")
+	if (board == 0)
 	{
 		// Board Image
 		var boardImage = new Image();
 		boardImage.src = "res/RoadSafetyBoard.png";
+		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946, 400, 0);
+	}
+	else if (board == 1)
+	{
+		// Board Image
+		var boardImage = new Image();
+		boardImage.src = "res/SustainableTravelBoard.png";
 		spriteBoard = new CSprite(boardImage, 0, 0, 946, 946, 400, 0);
 	}
 	
