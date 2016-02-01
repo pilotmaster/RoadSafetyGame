@@ -149,17 +149,37 @@
 			// Load the main menu sprites
 			LoadMenuSprites();
 			
-			// Event Listener for mouse clicks
-			window.addEventListener("click", function() 
+			// Determine if internet explorer 10
+			var userAgent = window.navigator.userAgent;
+			var isMSIE = userAgent.indexOf('MSIE ');
+			if (isMSIE > 0)
 			{
-				mouseX = event.pageX - elemLeft;
-				mouseY = event.pageY - elemTop;
-
-				for (i = 0; i < buttonsAmount; i++)
+				// Event Listener for mouse clicks
+				window.addEventListener("click", function(e) 
 				{
-					buttonsArray[i].BeenClicked();
-				}
-			}, false);
+					mouseX = e.pageX - elemLeft;
+					mouseY = e.pageY - elemTop;
+
+					for (i = 0; i < buttonsAmount; i++)
+					{
+						buttonsArray[i].BeenClicked();
+					}
+				}, false);
+			}
+			else
+			{
+				// Event Listener for mouse clicks
+				window.addEventListener("click", function() 
+				{
+					mouseX = event.pageX - elemLeft;
+					mouseY = event.pageY - elemTop;
+
+					for (i = 0; i < buttonsAmount; i++)
+					{
+						buttonsArray[i].BeenClicked();
+					}
+				}, false);
+			}
 			
 			// Add event listeners for screen resizes or orientation changes on mobiles
 			window.addEventListener('resize', ResizeGame, false);
