@@ -425,23 +425,35 @@
 			// State the desired aspect ratio (the wanted width / the wanted height)
 			var desiredHeight = 946;
 			var desiredWidth = 1920;
-			var desiredAspectRatio = desiredWidth / desiredHeight;
+			var desiredAspect = desiredWidth / desiredHeight;
 			
 			// Determine the new dimensions of the window & the new aspect ratio
-			var newWidth = window.innerWidth;
-			var newHeight = window.innerHeight;
+			var newWidth;
+			var newHeight;
+			if (window.innerWidth != undefined)
+			{
+				newWidth = window.innerWidth;
+				newHeight = window.innerHeight;
+			}
+			else
+			{
+				var docBody = document.body;
+				var doc = document.documentElement;
+				newWidth = Math.max(doc.clientWidth, docBody.clientWidth);
+				newHeight = Math.max(doc.clientHeight, docBody.clientHeight);
+			}
 			var newAspectRatio = newWidth / newHeight;
 			
 			// Determine whether the new aspect ratio has gone out of sync and correct it
-			if (newAspectRatio > desiredAspectRatio)
+			if (newAspectRatio > desiredAspect)
 			{
-				newWidth = newHeight * desiredAspectRatio;
+				newWidth = newHeight * desiredAspect;
 				gameArea.style.height = newHeight + 'px';
 				gameArea.style.width = newWidth + 'px';
 			}
 			else
 			{
-				newHeight = newWidth / desiredAspectRatio;
+				newHeight = newWidth / desiredAspect;
 				gameArea.style.width = newWidth + 'px';
 				gameArea.style.height = newHeight + 'px';
 			}
@@ -455,9 +467,9 @@
 			gameCanvas.height = newHeight;
 			
 			// Determine the new global scale
-			var originalSize = desiredHeight + desiredWidth;
+			var desiredSize = desiredHeight + desiredWidth;
 			var newSize = newWidth + newHeight;
-			scale = newSize / originalSize;
+			scale = newSize / desiredSize;
 			
 			// Update distance from the side which the canvas starts
 			elemLeft = gameCanvas.offsetLeft;
@@ -473,9 +485,6 @@
 			messageBoxMessage.style.left = 450 * scale + 'px';
 			messageBoxMessage.style.width = 820 * scale + 'px';
 			messageBoxMessage.style.fontSize = (newWidth / 720) + 'em';
-			
-			// Append changes
-			document.body.appendChild(gameCanvas);
 		}
 				
 		<!-- Start execution by calling the Main function -->
